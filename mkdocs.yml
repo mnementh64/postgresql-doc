@@ -1,0 +1,42 @@
+site_name: PostgreSQL doc
+site_description: PostgreSQL doc
+site_author: Sylvain Caillet
+copyright: free
+
+pages: 
+    - Overview: index.md
+    - mvcc.md
+    - cache_system.md
+    - wal_files.md
+    - checkpoints.md
+    - autovacuum.md
+    - statistics.md
+    - monitoring.md
+    - pgsql_perf.md
+    - query_optimizations.md
+    - table_design.md
+    - other_points.md
+    - linux_tuning.md
+    - useful-tools.md
+    - useful-scripts.md
+
+markdown_extensions:
+  - admonition
+  - codehilite 
+  - toc(permalink=true)
+
+site_favicon: 'img/favicon.ico'
+
+theme:
+   name: 'material'
+   favicon: 'img/favicon.ico'
+   palette:
+       primary: 'deep orange'
+       accent: 'deep orange'
+extra:
+  palette:
+    primary: 'deep orange'
+    accent: 'deep orange'
+      
+#extra_css:
+#    - extra.css
