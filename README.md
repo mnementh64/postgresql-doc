@@ -10,7 +10,7 @@ Enjoy !
 
 ## To see the doc
 
-It's a [MkDocs]() documentation based on Markdown format.
+It's a [MkDocs](http://www.mkdocs.org/) documentation based on Markdown format.
 
 To display it, go to this directory.
 
