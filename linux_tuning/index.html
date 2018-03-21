@@ -1,0 +1,621 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Linux tuning - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#tuning-linux-for-postgresql" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Linux tuning
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Performance with PostgreSQL" class="md-nav__link">
+      Performance with PostgreSQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Linux tuning
+      </label>
+    
+    <a href="./" title="Linux tuning" class="md-nav__link md-nav__link--active">
+      Linux tuning
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kernel-cache-tuning" title="Kernel cache tuning" class="md-nav__link">
+    Kernel cache tuning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel-other-parameters" title="Kernel other parameters" class="md-nav__link">
+    Kernel other parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kernel-cache-tuning" title="Kernel cache tuning" class="md-nav__link">
+    Kernel cache tuning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel-other-parameters" title="Kernel other parameters" class="md-nav__link">
+    Kernel other parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="tuning-linux-for-postgresql">Tuning Linux for PostgreSQL<a class="headerlink" href="#tuning-linux-for-postgresql" title="Permanent link">&para;</a></h1>
+<p>A reference conf could be found <a href="https://www.youtube.com/watch?v=Lbx-JVcGIFo">here</a> and its slides <a href="https://www.percona.com/live/data-performance-conference-2016/sites/default/files/slides/pl_2016_kosmodemiansky.pdf">here</a>. 
+Good advices <a href="https://www.postgresql-sessions.org/_media/en/5/performances_systeme_pg.pdf">there</a>.</p>
+<h2 id="kernel-cache-tuning">Kernel cache tuning<a class="headerlink" href="#kernel-cache-tuning" title="Permanent link">&para;</a></h2>
+<p>Kernel parameters <code>dirty*</code> manage the cache behavior. A good understanding of how cache works could be found <a href="https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/">there</a>.  </p>
+<p>By default :</p>
+<div class="codehilite"><pre><span></span>scaillet@Sylvain ~ $ sudo sysctl -a <span class="p">|</span> grep dirty
+
+vm.dirty_background_bytes <span class="o">=</span> <span class="m">0</span>       <span class="c1"># ratio limit applies</span>
+vm.dirty_background_ratio <span class="o">=</span> <span class="m">10</span>      <span class="c1"># 10% of RAM is available for cache --&gt; huge on modern servers ! </span>
+vm.dirty_bytes <span class="o">=</span> <span class="m">0</span>                  <span class="c1"># ratio limit applies</span>
+vm.dirty_expire_centisecs <span class="o">=</span> <span class="m">3000</span>    <span class="c1"># cache has to flush at least every 30s</span>
+vm.dirty_ratio <span class="o">=</span> <span class="m">20</span>                 <span class="c1"># hard limit of 20% of RAM</span>
+vm.dirty_writeback_centisecs <span class="o">=</span> <span class="m">500</span>  
+vm.dirtytime_expire_seconds <span class="o">=</span> <span class="m">43200</span>
+</pre></div>
+
+
+<p>They are set for basic OS usage. In case of Database server with high workload, it should be tuned not to reduce the impact of <a href="../postgresql/statistics/#checkpoint-and-linux-cache">the checkpoint tuning</a>, for example.</p>
+<p>One of the main drawback of bad tuning is heavy I/O pikes. They could occured because :</p>
+<ul>
+<li>the cache write asynchroneously most of the time</li>
+<li>lot of I/O overwhelm the cache</li>
+<li>the cache decided to flush everything by turning writings synchroneously  </li>
+</ul>
+<p>If we force the cache to flush its data more frequently, it might reduce the heavy pike cases.</p>
+<p>You can also see statistics on the page cache in /proc/vmstat:</p>
+<div class="codehilite"><pre><span></span>$ cat /proc/vmstat <span class="p">|</span> egrep <span class="s2">&quot;dirty|writeback&quot;</span>
+ nr_dirty <span class="m">878</span>
+ nr_writeback <span class="m">0</span>
+ nr_writeback_temp <span class="m">0</span>
+</pre></div>
+
+
+<p>In my case I have 878 dirty pages waiting to be written to disk.</p>
+<p>Typically for our usage (heavy workload), a good way is to reduce the cache size by lowering ratios :</p>
+<div class="codehilite"><pre><span></span>vm.dirty_background_ratio = 5
+vm.dirty_ratio = 10
+</pre></div>
+
+
+<p>Another approch is given by Ilya Kosmodemiansky in <a href="https://www.percona.com/live/data-performance-conference-2016/sites/default/files/slides/pl_2016_kosmodemiansky.pdf">the slide 39</a>.</p>
+<div class="codehilite"><pre><span></span>vm.dirty_background_bytes = 67108864
+vm.dirty_bytes = 536870912
+</pre></div>
+
+
+<p>These values looks more reasonable for RAID with 512MB cache on board.</p>
+<p>In fact, it's good to configure the cache to have max some hundreds of MB to synchronize, no more : less than 1GB.</p>
+<p><strong>What on VM ??</strong>
+In the following <a href="https://www.postgresql-sessions.org/_media/en/5/performances_systeme_pg.pdf">slides</a>, the 13th gives a definitive advice : no VM for Postgres !</p>
+<h4 id="kernel-other-parameters">Kernel other parameters<a class="headerlink" href="#kernel-other-parameters" title="Permanent link">&para;</a></h4>
+<p>On dedicated servers, we could tune some other kernel parameters.</p>
+<ul>
+<li>
+<p>Swap is bad for SGBD. Set : </p>
+<p>vm.swappiness = 5 # or 10</p>
+</li>
+<li>
+<p>Overcommit is also bad. Set : </p>
+<p>vm.overcommit_memory = 2 # to deactivate
+vm.overcommit_ratio = (RAM – SWAP) * 100 / RAM</p>
+</li>
+</ul>
+<p>To know how much swap is configured on a server, type <code>swapon -s</code> to display the size in Kbytes.</p>
+<p>To learn more about overcommit values, see the <a href="https://www.kernel.org/doc/Documentation/vm/overcommit-accounting">linux documentation</a>.
+Possible values are : </p>
+<div class="codehilite"><pre><span></span><span class="mi">0</span><span class="o">:</span> <span class="n">heuristic</span> <span class="n">overcommit</span> <span class="o">(</span><span class="k">this</span> <span class="k">is</span> <span class="n">the</span> <span class="k">default</span><span class="o">)</span>
+<span class="mi">1</span><span class="o">:</span> <span class="n">always</span> <span class="n">overcommit</span><span class="o">,</span> <span class="n">never</span> <span class="n">check</span>
+<span class="mi">2</span><span class="o">:</span> <span class="n">always</span> <span class="n">check</span><span class="o">,</span> <span class="n">never</span> <span class="n">overcommit</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>NUMA architecture is also bad for PostgreSQL : </p>
+<p>vm.zone_reclaim_mode = 0 # to deactivate</p>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../other_points/" title="Other points" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Other points
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../useful-tools/" title="Useful tools" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Useful tools
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

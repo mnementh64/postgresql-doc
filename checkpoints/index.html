@@ -1,0 +1,653 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Checkpoints - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#checkpoints" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Checkpoints
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Checkpoints
+      </label>
+    
+    <a href="./" title="Checkpoints" class="md-nav__link md-nav__link--active">
+      Checkpoints
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-is-a-checkpoint" title="What's is a checkpoint ?" class="md-nav__link">
+    What's is a checkpoint ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-trigger-checkpoints" title="What trigger checkpoints ?" class="md-nav__link">
+    What trigger checkpoints ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spread-checkpoints" title="Spread checkpoints" class="md-nav__link">
+    Spread checkpoints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoint-and-linux-cache" title="Checkpoint and Linux Cache" class="md-nav__link">
+    Checkpoint and Linux Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-activity" title="Control activity" class="md-nav__link">
+    Control activity
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Pgsql perf" class="md-nav__link">
+      Pgsql perf
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-is-a-checkpoint" title="What's is a checkpoint ?" class="md-nav__link">
+    What's is a checkpoint ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-trigger-checkpoints" title="What trigger checkpoints ?" class="md-nav__link">
+    What trigger checkpoints ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spread-checkpoints" title="Spread checkpoints" class="md-nav__link">
+    Spread checkpoints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoint-and-linux-cache" title="Checkpoint and Linux Cache" class="md-nav__link">
+    Checkpoint and Linux Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-activity" title="Control activity" class="md-nav__link">
+    Control activity
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="checkpoints">Checkpoints<a class="headerlink" href="#checkpoints" title="Permanent link">&para;</a></h1>
+<h2 id="whats-is-a-checkpoint">What's is a checkpoint ?<a class="headerlink" href="#whats-is-a-checkpoint" title="Permanent link">&para;</a></h2>
+<p><a href="https://blog.2ndquadrant.com/basics-of-tuning-checkpoints/">This is a good reading</a> from 2nd quadrant.</p>
+<p>Data are first written to WAL (<a href="../postgresql/wal_files/">Write Ahead Log</a>) files before being copied to data files. That way to process ensures durability : in case of a crash, database will use WAL to recover data and write them to data files.</p>
+<p>Users only have to wait for WAL files to be flushed to disk to have data available in DB. By this time, RAM cache could be used for users and be flushed to disk later. </p>
+<p>A checkpoint writes all dirty pages from memory to disk, marks them as “clean" in shared_buffers, and stores information that all of wal up to now is applied : WAL files are not needed before the checkpoint position.</p>
+<p><img alt="illustrate buffers, wal files and checkpoint effect" src="../img/buffers-wal-checkpoint.png" /></p>
+<p>In practice, we often want to find a good ratio between :</p>
+<ul>
+<li>having not too frequent checkpoints so IO for buffers is spread on a large amount of time</li>
+<li>but frequent enough to limit the recovery time after a crash and to limit the disk usage for WAL files </li>
+</ul>
+<h2 id="what-trigger-checkpoints">What trigger checkpoints ?<a class="headerlink" href="#what-trigger-checkpoints" title="Permanent link">&para;</a></h2>
+<p>Basically, timeout or size :</p>
+<ul>
+<li>it's been more than the <code>checkpoint_timeout</code> value since previous checkpoint ended</li>
+<li>WAL folder (<code>/pgsql_folder/pg_xlog/</code> before version 10 or <code>/pgsql_folder/pg_wal/</code> since) if full. Its size could not be more than the <code>max_wal_size</code> value.</li>
+</ul>
+<p>Checkpoints should be mostly triggered by timeout, not size.</p>
+<h2 id="spread-checkpoints">Spread checkpoints<a class="headerlink" href="#spread-checkpoints" title="Permanent link">&para;</a></h2>
+<p>Checkpoints is basically a writing to disk of dirty buffers. Its job must be done during a fraction of the checkpoint total time, fraction set by the <code>checkpoint_completion_target</code> parameters (0.5 by default).</p>
+<h2 id="checkpoint-and-linux-cache">Checkpoint and Linux Cache<a class="headerlink" href="#checkpoint-and-linux-cache" title="Permanent link">&para;</a></h2>
+<p>Linux cache by default can handle a great amount of data before flushing it to the storage. It could be harmful for the checkpoint process. If we tune the checkpoint to spread the writing on a quite long time and the OS cache get it and flush all at a single time, it will create an I/O pike. </p>
+<p>It could be better not to let the cache keep too much data and be force to flush it more frequently.</p>
+<p>See <a href="../postgresql/linux_tuning/#cache-tuning">details on how to tune Linux Kernel</a> for Database performance usage.</p>
+<h2 id="control-activity">Control activity<a class="headerlink" href="#control-activity" title="Permanent link">&para;</a></h2>
+<p>Of course, stats could be gathered. But also, a global status of the server is available by the command <code>/usr/lib/postgresql/9.6/bin/pg_controldata /var/lib/postgresql/9.6/main/</code> and outputs :</p>
+<div class="codehilite"><pre><span></span>pg_control version number:            960
+Catalog version number:               201608131
+Database system identifier:           6382382084904487037
+Database cluster state:               in production
+pg_control last modified:             Tue 23 Jan 2018 10:24:56 AM CET
+Latest checkpoint location:           1D70/D4518DB8
+Prior checkpoint location:            1D6F/58F47450
+Latest checkpoint&#39;s REDO location:    1D6F/80331B08
+Latest checkpoint&#39;s REDO WAL file:    0000000100001D6F00000080
+Latest checkpoint&#39;s TimeLineID:       1
+Latest checkpoint&#39;s PrevTimeLineID:   1
+Latest checkpoint&#39;s full_page_writes: on
+Latest checkpoint&#39;s NextXID:          0:265937941
+Latest checkpoint&#39;s NextOID:          17869586
+Latest checkpoint&#39;s NextMultiXactId:  1
+Latest checkpoint&#39;s NextMultiOffset:  0
+Latest checkpoint&#39;s oldestXID:        70567326
+Latest checkpoint&#39;s oldestXID&#39;s DB:   20430
+Latest checkpoint&#39;s oldestActiveXID:  0
+Latest checkpoint&#39;s oldestMultiXid:   1
+Latest checkpoint&#39;s oldestMulti&#39;s DB: 20430
+Latest checkpoint&#39;s oldestCommitTsXid:0
+Latest checkpoint&#39;s newestCommitTsXid:0
+Time of latest checkpoint:            Tue 23 Jan 2018 09:03:56 AM CET
+Fake LSN counter for unlogged rels:   0/1
+Minimum recovery ending location:     0/0
+Min recovery ending loc&#39;s timeline:   0
+Backup start location:                0/0
+Backup end location:                  0/0
+End-of-backup record required:        no
+wal_level setting:                    minimal
+wal_log_hints setting:                off
+max_connections setting:              200
+max_worker_processes setting:         8
+max_prepared_xacts setting:           0
+max_locks_per_xact setting:           256
+track_commit_timestamp setting:       off
+Maximum data alignment:               8
+Database block size:                  8192
+Blocks per segment of large relation: 131072
+WAL block size:                       8192
+Bytes per WAL segment:                16777216
+Maximum length of identifiers:        64
+Maximum columns in an index:          32
+Maximum size of a TOAST chunk:        1996
+Size of a large-object chunk:         2048
+Date/time type storage:               64-bit integers
+Float4 argument passing:              by value
+Float8 argument passing:              by value
+Data page checksum version:           0
+</pre></div>
+
+
+<p>That is a mix of settings and running statuses.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../wal_files/" title="Wal files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Wal files
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../autovacuum/" title="Autovacuum" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Autovacuum
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

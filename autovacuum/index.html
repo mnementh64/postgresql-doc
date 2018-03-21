@@ -1,0 +1,727 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Autovacuum - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#autovacuum" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Autovacuum
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Autovacuum
+      </label>
+    
+    <a href="./" title="Autovacuum" class="md-nav__link md-nav__link--active">
+      Autovacuum
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-autovacuum" title="What is an autovacuum ?" class="md-nav__link">
+    What is an autovacuum ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-precision" title="Technical precision" class="md-nav__link">
+    Technical precision
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-triggers-autovacuum" title="What triggers Autovacuum ?" class="md-nav__link">
+    What triggers Autovacuum ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloating" title="Bloating" class="md-nav__link">
+    Bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-bloating" title="Index bloating" class="md-nav__link">
+    Index bloating
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-series" title="Time series" class="md-nav__link">
+    Time series
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pg_repack" title="pg_repack" class="md-nav__link">
+    pg_repack
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyze" title="Analyze" class="md-nav__link">
+    Analyze
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Pgsql perf" class="md-nav__link">
+      Pgsql perf
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-autovacuum" title="What is an autovacuum ?" class="md-nav__link">
+    What is an autovacuum ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-precision" title="Technical precision" class="md-nav__link">
+    Technical precision
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-triggers-autovacuum" title="What triggers Autovacuum ?" class="md-nav__link">
+    What triggers Autovacuum ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloating" title="Bloating" class="md-nav__link">
+    Bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-bloating" title="Index bloating" class="md-nav__link">
+    Index bloating
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-series" title="Time series" class="md-nav__link">
+    Time series
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pg_repack" title="pg_repack" class="md-nav__link">
+    pg_repack
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analyze" title="Analyze" class="md-nav__link">
+    Analyze
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="autovacuum">Autovacuum<a class="headerlink" href="#autovacuum" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-an-autovacuum">What is an autovacuum ?<a class="headerlink" href="#what-is-an-autovacuum" title="Permanent link">&para;</a></h2>
+<p>It's an automatic vacuum !</p>
+<p>A <a href="https://www.citusdata.com/blog/2016/11/04/autovacuum-not-the-enemy/">good reading</a> to understand what is autovacuum and why it exists.</p>
+<p>PostgreSQL is a MVCC database : what does that mean ? </p>
+<p>A good reading (quite complete !) could be found here : <a href="http://momjian.us/main/writings/pgsql/mvcc.pdf">http://momjian.us/main/writings/pgsql/mvcc.pdf</a>. </p>
+<p>BTW, you could have a look to all PDFs available in <strong>Momjian</strong> repo : <a href="http://momjian.us/main/writings/pgsql/">http://momjian.us/main/writings/pgsql/</a>.</p>
+<p>The most important is to understand a MVCC database have a natural behavior to grow for ever if nothing is done.</p>
+<p>Vacuum is a way :</p>
+<ul>
+<li>to free / reuse the space (pages) used by transactions once they are committed.</li>
+<li>to update tables statistics so the query planner could rely on good info (<code>ANALYZE</code> command, see <a href="../postgresql/autovacuum/#analyze">below</a> for details)</li>
+<li>to maintain the <a href="https://www.postgresql.org/docs/9.6/static/storage-vm.html">visibility map</a> of what pages contain only tuples visible to all transaction or future one (to help vacuum process itself or help index scans).  </li>
+</ul>
+<p><strong>Autovacuum</strong> is a PostgreSQL process to automate vacuum on databases.</p>
+<p>To regain all possible space, we must execute a <code>VACUUM FULL</code> query, which needs an exclusive locks on the table : not easy in production environment !</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>TRUNCATE</code> command doesn't require to regain free space, so no auto VACUUM is launched after it. </p>
+</div>
+<div class="admonition documentation">
+<p class="admonition-title">Documentation</p>
+<p>Official link to <a href="https://docs.postgresqlfr.org/9.6/sql-vacuum.html">VACUUM command</a></p>
+</div>
+<h2 id="technical-precision">Technical precision<a class="headerlink" href="#technical-precision" title="Permanent link">&para;</a></h2>
+<p>People often assume that VACUUM is the process that should return the disk space to the file system. It does do this but only in very specific cases.</p>
+<p>That used space is contained in page files that make up the tables and indexes (called objects from now on) in the Postgres database system. 
+Page files all have the same size and differently sized objects just have as many page files as they need. 
+If VACUUM happens to mark every row in a page file as unavailable AND that page also happens to be the final page for the entire object, THEN the disk space is returned to the file system. </p>
+<p>If there is a single available row, or the page file is any other but the last one, the disk space is never returned by a normal VACUUM. 
+<strong>This is bloat.</strong> See <a href="../postgresql/autovacuum/#bloating">below</a> for details. </p>
+<h2 id="what-triggers-autovacuum">What triggers Autovacuum ?<a class="headerlink" href="#what-triggers-autovacuum" title="Permanent link">&para;</a></h2>
+<p>A worker seeks for tables with :</p>
+<div class="codehilite"><pre><span></span>vacuum threshold = autovacuum_vacuum_threshold + autovacuum_vacuum_scale_factor * number of tuples
+</pre></div>
+
+
+<p>But it keeps also a trace of I/O "credits" that are consumed. When credits used exceed the <code>autovacuum_vacuum_cost_limit</code> then autovacuum pauses all workers for <code>autovacuum_vacuum_cost_delay</code> milliseconds.</p>
+<p>Default factor <code>autovacuum_vacuum_scale_factor = 0.2</code> is far too high for big tables. It couldn't help to control table bloating (see <a href="../postgresql/autovacuum/#bloating">below</a> for details).</p>
+<p><img alt="A picture to sump-up" src="../img/autovacuum-process.png" />.</p>
+<h2 id="bloating">Bloating<a class="headerlink" href="#bloating" title="Permanent link">&para;</a></h2>
+<p>In MVCC database servers, tables updates, transactions uses spaces and need to be vacuumed to regain space. If it's not the case, table / index disk size possibly increase a lot : phenomenon named bloating.  </p>
+<p>It could be estimated by some queries : see details in the <a href="../postgresql/statistics/#tableindex-bloating">statistics page</a>.</p>
+<p>Bad cases could occur with PostgreSQL catalog tables themselves bloated !</p>
+<p>Bloating could be bad because when a query is executed on a table, all rows visibility flags are checked to see if the row is actually available for the transaction, including rows of the bloated part. </p>
+<p>To understand why bloating is not always bad could be found <a href="https://www.keithf4.com/checking-for-postgresql-bloat/">here</a>.</p>
+<p>A good example of investigation on table bloating cause : <a href="https://www.cybertec-postgresql.com/en/stale-statistics-cause-table-bloat/">https://www.cybertec-postgresql.com/en/stale-statistics-cause-table-bloat/</a>.</p>
+<h4 id="index-bloating">Index bloating<a class="headerlink" href="#index-bloating" title="Permanent link">&para;</a></h4>
+<p>Index bloating is even worse than table bloating because an index points to items, not tuples so it doesn't know if an item points to dead tuple or not. Thus, bloated indexes are slower.</p>
+<p>To refresh an index :</p>
+<div class="codehilite"><pre><span></span>REINDEX INDEX the_index;
+</pre></div>
+
+
+<p>To refresh all indexes of table :</p>
+<div class="codehilite"><pre><span></span>REINDEX TABLE the_table;
+</pre></div>
+
+
+<p>To refresh all indexes of all system tables : </p>
+<div class="codehilite"><pre><span></span>REINDEX SYSTEM &quot;the_database&quot;;
+</pre></div>
+
+
+<h4 id="time-series">Time series<a class="headerlink" href="#time-series" title="Permanent link">&para;</a></h4>
+<p>Of course, for time series, standard autovacuum is an issue because table is never empty and space could never be regained. Some rows could be re-used but occupied space will grow forever, even slowly.</p>
+<p>Other solutions are described in this post : <a href="https://www.redpill-linpro.com/sysadvent/2017/12/08/pg_repack.html">https://www.redpill-linpro.com/sysadvent/2017/12/08/pg_repack.html</a>.</p>
+<h4 id="pg_repack">pg_repack<a class="headerlink" href="#pg_repack" title="Permanent link">&para;</a></h4>
+<p>This project could be a good solution : <a href="https://github.com/reorg/pg_repack/">https://github.com/reorg/pg_repack/</a>.</p>
+<p>Install on Debian</p>
+<div class="codehilite"><pre><span></span>apt-get update &amp;&amp; apt-get install -y postgresql-9.6-repack
+</pre></div>
+
+
+<p>Create an extension in the DB </p>
+<div class="codehilite"><pre><span></span>psql -U my_user -h localhost -c &quot;CREATE EXTENSION pg_repack&quot; -d the_db
+</pre></div>
+
+
+<p>Launch pg_repack on a table </p>
+<div class="codehilite"><pre><span></span>/usr/lib/postgresql/9.6/bin/pg_repack --user my_user --table=probes_global_statistics --jobs 5 the_db
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Tables cleaned by pg_repack must have a primary key or not-null unique keys. Thus, netflow aggregation tables are not eligible for this : they don't have a primary key.</p>
+</div>
+<h2 id="analyze">Analyze<a class="headerlink" href="#analyze" title="Permanent link">&para;</a></h2>
+<p><code>ANALYZE table [column (, ...)]</code> SQL command updates query planner statistic for this table. It's important to have up-to-date stats so the planner could compute efficient strategies.</p>
+<p>It's not useful to frequently ANALYZE columns with a quite constant data distribution. </p>
+<p>It's really important to frequently ANALYZE columns with increasing values, like timestamp for example.</p>
+<p>Automatic analyze are triggered when the number of modified rows in a table exceeds </p>
+<div class="codehilite"><pre><span></span>vacuum threshold = autovacuum_analyze_threshold + autovacuum_analyze_scale_factor * number of tuples
+</pre></div>
+
+
+<div class="admonition documentation">
+<p class="admonition-title">Documentation</p>
+<p>Official link to <a href="https://docs.postgresqlfr.org/9.6/sql-analyze.html">ANALYZE command</a></p>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../checkpoints/" title="Checkpoints" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Checkpoints
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../statistics/" title="Statistics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Statistics
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,756 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Table design - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#table-design" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Table design
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Performance with PostgreSQL" class="md-nav__link">
+      Performance with PostgreSQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Table design
+      </label>
+    
+    <a href="./" title="Table design" class="md-nav__link md-nav__link--active">
+      Table design
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#row-size" title="Row size" class="md-nav__link">
+    Row size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" title="Best practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#null-and-disk-space" title="NULL and disk space" class="md-nav__link">
+    NULL and disk space
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodology-of-tests" title="Methodology of tests" class="md-nav__link">
+    Methodology of tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices_1" title="Best practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#row-size" title="Row size" class="md-nav__link">
+    Row size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" title="Best practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#null-and-disk-space" title="NULL and disk space" class="md-nav__link">
+    NULL and disk space
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodology-of-tests" title="Methodology of tests" class="md-nav__link">
+    Methodology of tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices_1" title="Best practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="table-design">Table design<a class="headerlink" href="#table-design" title="Permanent link">&para;</a></h1>
+<p>Some explanations and best practices to design well tables, especially tables with special usage :</p>
+<ul>
+<li>hundred of millions / billions of rows</li>
+<li>or / and heavily updated, inserted or deleted</li>
+</ul>
+<p>Using <code>pgstattuple</code> extension, it's easy to get an accurate row size (without having to perform any VACUUM FULL), which is very useful to verify / understand how PostgreSQL deal with data types, NULL values, ... </p>
+<h2 id="row-size">Row size<a class="headerlink" href="#row-size" title="Permanent link">&para;</a></h2>
+<p>Some example of good explanations : <a href="https://stackoverflow.com/questions/13524222/table-size-with-page-layout">here</a> and <a href="https://stackoverflow.com/questions/13570613/making-sense-of-postgres-row-sizes">here</a>.</p>
+<p>Official doc is <a href="https://www.postgresql.org/docs/9.6/static/storage-page-layout.html#HEAPTUPLEHEADERDATA-TABLE">here</a>.</p>
+<p>Row is made of a :</p>
+<ul>
+<li>header (23 bytes)</li>
+<li>1 byte of data alignement (8 bytes per block) --&gt; could be used for NULL bitmap : see <a href="../postgresql/table_design/#null-and-disk-space">below</a> for details </li>
+<li>depending on each column type (for example, <a href="https://www.postgresql.org/docs/9.6/static/datatype-numeric.html#DATATYPE-INT">numerical types sizes</a> from official documentation) </li>
+<li>some padding to respect data alignment (see <code>typealign</code> field description of this <a href="https://www.postgresql.org/docs/current/static/catalog-pg-type.html">official doc page</a>)</li>
+</ul>
+<p>Padding doesn't apply for the last column.</p>
+<h4 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h4>
+<p>Column order could change the row size because some types have a padding to respect data alignement.</p>
+<p>Example :</p>
+<div class="codehilite"><pre><span></span>integer are 4 bytes and need a data alignement of 4 bytes
+</pre></div>
+
+
+<p>Let's create / fill a table with 2 integer columns.</p>
+<div class="codehilite"><pre><span></span><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">my_table</span><span class="p">;</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">my_table</span> <span class="k">AS</span> <span class="k">SELECT</span> 
+        <span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a1</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a2</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The row size is : <strong>32</strong> as expected : 24 (header) + 2 * 4 (2 integers)</p>
+<p>But with 3 integers and 1 timestamp (expected to be 8 bytes, see <a href="https://www.postgresql.org/docs/9.6/static/datatype-datetime.html">official doc</a>), </p>
+<div class="codehilite"><pre><span></span><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">my_table</span><span class="p">;</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">my_table</span> <span class="k">AS</span> <span class="k">SELECT</span> 
+        <span class="mi">1</span> <span class="k">as</span> <span class="n">a1</span>
+        <span class="p">,</span><span class="mi">2</span> <span class="k">as</span> <span class="n">a2</span>
+        <span class="p">,</span><span class="mi">3</span> <span class="k">as</span> <span class="n">a3</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">::</span><span class="k">timestamp</span><span class="p">,</span> <span class="s1">&#39;2018-12-31&#39;</span><span class="p">::</span><span class="k">timestamp</span><span class="p">,</span> <span class="s1">&#39;1 day&#39;</span><span class="p">::</span><span class="nb">interval</span><span class="p">)</span> <span class="k">as</span> <span class="n">a4</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The row size is : <strong>48</strong> that is : 24 (header) + 3 * 4 (12 integers) + 4 (padding of last integer) + 8 (timestamp)</p>
+<p>The 2nd integer cost 8 bytes, and not 4 !</p>
+<p>So imagine column orders including this padding constraint, then check a solution with this methodology. </p>
+<h2 id="null-and-disk-space">NULL and disk space<a class="headerlink" href="#null-and-disk-space" title="Permanent link">&para;</a></h2>
+<p>Each row is composed of a header then other blocks for data.</p>
+<p>At the end of the header (23 bytes), there is a byte free for a NULL bitmap that could be used to flag NULL in any of the first 8 columns. </p>
+<p>So, since a table has a 9th column (with a <code>NOT NULL</code> constraint or not), the null bitmap is extended of an additional 8 bytes (<code>MAXALIGN</code> on 64bits CPUs) to flag any of the next 64 (8*8) columns.</p>
+<p>And so on.</p>
+<p>Reference <a href="https://stackoverflow.com/questions/5008753/does-not-using-null-in-postgresql-still-use-a-null-bitmap-in-the-header">here</a>.
+Also <a href="https://stackoverflow.com/questions/12145772/do-nullable-columns-occupy-additional-space-in-postgresql/12147130#12147130">here</a>.</p>
+<p>Assuming :</p>
+<ul>
+<li>a table with all columns as integer (can be null),</li>
+<li>an integer is 4 bytes long,</li>
+<li><code>select tuple_len / tuple_count from pgstattuple('my_table')</code> query gives the tuple size,</li>
+</ul>
+<p>we get :</p>
+<table>
+<thead>
+<tr>
+<th>number of columns</th>
+<th>constraints</th>
+<th>nb columns full of null</th>
+<th>tuple size</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>none</td>
+<td>8</td>
+<td>24</td>
+<td>standard header = 23+1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>none</td>
+<td>9</td>
+<td>32</td>
+<td>24 (standard header) + 8 (new NULL bitmap)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>none</td>
+<td>8</td>
+<td>36</td>
+<td>32 (previous) + 4 (int)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>none</td>
+<td>1</td>
+<td>64</td>
+<td>24 (standard header)+ 8 * 4 (8 int) + 8 (new NULL bitmap)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9th NOT NULL</td>
+<td>1</td>
+<td>64</td>
+<td>24 (standard header)+ 8 * 4 (8 int) + 8 (new NULL bitmap)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1th NOT NULL</td>
+<td>1</td>
+<td>64</td>
+<td>24 (standard header)+ 8 * 4 (8 int) + 8 (new NULL bitmap)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="methodology-of-tests">Methodology of tests<a class="headerlink" href="#methodology-of-tests" title="Permanent link">&para;</a></h4>
+<p>For the last row of the test, you could use the following steps :</p>
+<p>Create / fill the table (100000 rows)</p>
+<div class="codehilite"><pre><span></span><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">my_table</span><span class="p">;</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">my_table</span> <span class="k">AS</span> <span class="k">SELECT</span> 
+        <span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a1</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a2</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a3</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a4</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a5</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a6</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a7</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a8</span>
+        <span class="p">,</span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">as</span> <span class="n">a9</span><span class="p">;</span>
+</pre></div>
+
+
+<p>then</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- add the NOT NULL constraint</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">my_table</span> <span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">a1</span> <span class="k">SET</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+
+<span class="c1">-- fill a column with null values</span>
+<span class="k">update</span> <span class="n">my_table</span> <span class="k">set</span> <span class="n">a5</span><span class="o">=</span><span class="k">null</span><span class="p">;</span>
+</pre></div>
+
+
+<p>and get the tuple size </p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="n">tuple_len</span> <span class="o">/</span> <span class="n">tuple_count</span> <span class="k">from</span> <span class="n">pgstattuple</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<h4 id="best-practices_1">Best practices<a class="headerlink" href="#best-practices_1" title="Permanent link">&para;</a></h4>
+<p>Especially useful for tables with a lot of rows. </p>
+<ul>
+<li>be aware of the data types : minimize the size (use integer for seconds instead of bigint for millis if possible)</li>
+<li>be aware of columns order because of alignment padding - it could help you save a lot of disk space and speed up writes, reads, ...</li>
+<li>NOT NULL : constraint must whenever it's possible (more for explicit coherence reasons than performance - see this <a href="https://dba.stackexchange.com/questions/140410/what-are-the-consequences-of-not-specifying-not-null-in-postgresql-for-fields-wh">discussion</a>).</li>
+<li>No special rules on how NULL columns or NOT NULL columns must be ordered.</li>
+</ul>
+<p>When modifying a table :</p>
+<ul>
+<li>it's very cheap to append a new column, even to a huge table, if it could be NULL (only set a bit in the null bitmap).</li>
+<li>think about it before adding a 9th column - it's very hard to understand what triggers the 8 bytes extension of the null bitmap for all rows containing at least one NULL. But when it occurs, it will have to rewrite all these rows (because the null bitmap is located between the header and the data). </li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../query_optimizations/" title="Query optimizations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Query optimizations
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../other_points/" title="Other points" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Other points
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

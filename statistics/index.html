@@ -1,0 +1,1277 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Statistics - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#statistics" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Statistics
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Statistics
+      </label>
+    
+    <a href="./" title="Statistics" class="md-nav__link md-nav__link--active">
+      Statistics
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoints" title="Checkpoints" class="md-nav__link">
+    Checkpoints
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#average-time" title="Average time" class="md-nav__link">
+    Average time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-does-the-writing" title="Who does the writing ?" class="md-nav__link">
+    Who does the writing ?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autovacuum" title="Autovacuum" class="md-nav__link">
+    Autovacuum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables-index-size" title="Tables &amp; index size" class="md-nav__link">
+    Tables &amp; index size
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-bloating" title="Table Bloating" class="md-nav__link">
+    Table Bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-per-table" title="Stats per table" class="md-nav__link">
+    Stats per table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-total" title="Stats total" class="md-nav__link">
+    Stats total
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-bloating" title="Index bloating" class="md-nav__link">
+    Index bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-per-index" title="Stats per index" class="md-nav__link">
+    Stats per index
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-total_1" title="Stats total" class="md-nav__link">
+    Stats total
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-usage" title="Cache usage" class="md-nav__link">
+    Cache usage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Pgsql perf" class="md-nav__link">
+      Pgsql perf
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoints" title="Checkpoints" class="md-nav__link">
+    Checkpoints
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#average-time" title="Average time" class="md-nav__link">
+    Average time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-does-the-writing" title="Who does the writing ?" class="md-nav__link">
+    Who does the writing ?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autovacuum" title="Autovacuum" class="md-nav__link">
+    Autovacuum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables-index-size" title="Tables &amp; index size" class="md-nav__link">
+    Tables &amp; index size
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-bloating" title="Table Bloating" class="md-nav__link">
+    Table Bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-per-table" title="Stats per table" class="md-nav__link">
+    Stats per table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-total" title="Stats total" class="md-nav__link">
+    Stats total
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-bloating" title="Index bloating" class="md-nav__link">
+    Index bloating
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-per-index" title="Stats per index" class="md-nav__link">
+    Stats per index
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-total_1" title="Stats total" class="md-nav__link">
+    Stats total
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-usage" title="Cache usage" class="md-nav__link">
+    Cache usage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="statistics">Statistics<a class="headerlink" href="#statistics" title="Permanent link">&para;</a></h1>
+<p>PostgreSQL provides a lot of statistics without any extension, and some more with some fine extensions.</p>
+<p>A very good survey of all available statistics and meaning can be found in <a href="https://www.slideshare.net/alexeylesovsky/deep-dive-into-postgresql-statistics-54594192">these slides</a>.</p>
+<p>Extracted fom a slide, here is a schema with all these stats and the area they are related to.</p>
+<p><img alt="PostgreSQL statistics" src="../img/postgresql-stats.png" /></p>
+<p>For some general explanations on stats and the meaning of each field, you could read :</p>
+<ul>
+<li><a href="http://www.dalibo.org/glmf106_les_vues_systemes_sous_postgresql_8.3">this french doc quite old but still useful</a></li>
+<li><a href="https://docs.datadoghq.com/integrations/postgres/">this doc from datadog, a monitoring tool</a></li>
+</ul>
+<h2 id="checkpoints">Checkpoints<a class="headerlink" href="#checkpoints" title="Permanent link">&para;</a></h2>
+<p>What is it ? Some <a href="../postgresql/checkpoints/">details</a>.</p>
+<p>It's a good starting point to be sure checkpoints behave well.</p>
+<p>The <code>pg_stat_bgwriter</code> view contains a single row about that activity.</p>
+<div class="codehilite"><pre><span></span>the_db=# select * from pg_stat_bgwriter;
+ checkpoints_timed | checkpoints_req | checkpoint_write_time | checkpoint_sync_time | buffers_checkpoint | buffers_clean | maxwritten_clean | buffers_backend | buffers_backend_fsync | buffers_alloc |          stats_reset          
+-------------------+-----------------+-----------------------+----------------------+--------------------+---------------+------------------+-----------------+-----------------------+---------------+-------------------------------
+                84 |               1 |             405618914 |               403083 |            1570508 |     122328215 |          1021398 |       138562615 |                     0 |     380478655 | 2018-01-18 09:14:13.970255+01
+(1 row)
+</pre></div>
+
+
+<ul>
+<li><code>checkpoints_timed</code> gives the number of checkpoints triggered by the tiemout (<strong>GOOD</strong>)</li>
+<li><code>checkpoints_req</code> gives the number of checkpoints triggered because the <code>pg_xlog</code> folder had reached its limit <code>max_wal_size</code> (<strong>BAD</strong>)</li>
+</ul>
+<p>These specific stats could be resetted by :</p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="n">pg_stat_reset_shared</span><span class="p">(</span><span class="s1">&#39;bgwriter&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<h4 id="average-time">Average time<a class="headerlink" href="#average-time" title="Permanent link">&para;</a></h4>
+<p>And the following query </p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span>
+  <span class="n">total_checkpoints</span><span class="p">,</span>
+  <span class="n">seconds_since_start</span> <span class="o">/</span> <span class="n">total_checkpoints</span> <span class="o">/</span> <span class="mi">60</span> <span class="k">AS</span> <span class="n">minutes_between_checkpoints</span>
+  <span class="k">FROM</span>
+  <span class="p">(</span><span class="k">SELECT</span>
+    <span class="k">EXTRACT</span><span class="p">(</span><span class="n">EPOCH</span> <span class="k">FROM</span> <span class="p">(</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">stats_reset</span><span class="p">))</span> <span class="k">AS</span> <span class="n">seconds_since_start</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">checkpoints_timed</span><span class="o">+</span><span class="n">checkpoints_req</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_checkpoints</span>
+    <span class="k">FROM</span> <span class="n">pg_stat_bgwriter</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">sub</span><span class="p">;</span>
+</pre></div>
+
+
+<p>gives :</p>
+<ul>
+<li>the total number of checkpoints that occured since last stat reset</li>
+<li>the average time of a checkpoint - should be closed to the <code>checkpoint_timeout</code> value </li>
+</ul>
+<h4 id="who-does-the-writing">Who does the writing ?<a class="headerlink" href="#who-does-the-writing" title="Permanent link">&para;</a></h4>
+<p>More complex, the following query is given by (the great) <code>Greg Smith</code> :</p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span>
+    <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">checkpoints_req</span><span class="p">)</span> <span class="o">/</span>
+        <span class="p">(</span><span class="n">checkpoints_timed</span> <span class="o">+</span> <span class="n">checkpoints_req</span><span class="p">)</span> <span class="k">AS</span> <span class="n">checkpoints_req_pct</span><span class="p">,</span>
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">buffers_checkpoint</span> <span class="o">*</span> <span class="n">block_size</span> <span class="o">/</span>
+         <span class="p">(</span><span class="n">checkpoints_timed</span> <span class="o">+</span> <span class="n">checkpoints_req</span><span class="p">))</span> <span class="k">AS</span> <span class="n">avg_checkpoint_write</span><span class="p">,</span>
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">block_size</span> <span class="o">*</span>
+        <span class="p">(</span><span class="n">buffers_checkpoint</span> <span class="o">+</span> <span class="n">buffers_clean</span> <span class="o">+</span> <span class="n">buffers_backend</span><span class="p">))</span> <span class="k">AS</span> <span class="n">total_written</span><span class="p">,</span>
+    <span class="mi">100</span> <span class="o">*</span> <span class="n">buffers_checkpoint</span> <span class="o">/</span>
+        <span class="p">(</span><span class="n">buffers_checkpoint</span> <span class="o">+</span> <span class="n">buffers_clean</span> <span class="o">+</span> <span class="n">buffers_backend</span><span class="p">)</span> <span class="k">AS</span> <span class="n">checkpoint_write_pct</span><span class="p">,</span>
+    <span class="mi">100</span> <span class="o">*</span> <span class="n">buffers_backend</span> <span class="o">/</span>
+        <span class="p">(</span><span class="n">buffers_checkpoint</span> <span class="o">+</span> <span class="n">buffers_clean</span> <span class="o">+</span> <span class="n">buffers_backend</span><span class="p">)</span> <span class="k">AS</span> <span class="n">backend_write_pct</span><span class="p">,</span>
+    <span class="mi">100</span> <span class="o">*</span> <span class="n">buffers_clean</span> <span class="o">/</span>
+        <span class="p">(</span><span class="n">buffers_checkpoint</span> <span class="o">+</span> <span class="n">buffers_clean</span> <span class="o">+</span> <span class="n">buffers_backend</span><span class="p">)</span> <span class="k">AS</span> <span class="n">clean_write_pct</span><span class="p">,</span>
+    <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">pg_stat_bgwriter</span><span class="p">,</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="k">cast</span><span class="p">(</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">integer</span><span class="p">)</span> <span class="k">AS</span> <span class="n">block_size</span><span class="p">)</span> <span class="n">bs</span><span class="p">;</span>
+</pre></div>
+
+
+<p>and provides :</p>
+<ul>
+<li>% of checkpoint triggered by size (almost <strong>100% is GOOD</strong>)</li>
+<li>How much data the average checkpoint write ?</li>
+<li>Total written by all processes</li>
+<li>% of buffers written by checkpoint process (spread in time : <strong>GOOD</strong>) </li>
+<li>% of buffers written by backend queries (read from disk because data not in cache / flushed from cache to disk then read again because data is dirty : <strong>BAD</strong>)</li>
+<li>% of buffers written by clean process (because need some space in cache : <strong>BAD</strong>) </li>
+</ul>
+<p><strong>Checkpoints are the best way to persist data to disk</strong> because the I/O are spread on time. To be efficient, other processes (backend / clean) should use the cache most of the time, not the disk.</p>
+<p>In addition, <code>pg_bg_writer</code> table also gives <code>maxwritten_clean</code> field that is the number of times the backgroung writer had to stop its writing (cleaning scan) because he has already written more buffers than specified in the <code>bgwriter_lru_maxpages</code> parameter.  </p>
+<h2 id="autovacuum">Autovacuum<a class="headerlink" href="#autovacuum" title="Permanent link">&para;</a></h2>
+<p>First of all, autovacuum activity could be traced with the same results in the <code>pg_stat_user_tables</code>, <code>pg_stat_sys_tables</code> and <code>pg_stat_all_tables</code> views.</p>
+<p>For each table created by the user, you could find :</p>
+<div class="codehilite"><pre><span></span>last_vacuum      |
+last_autovacuum  | 2008-04-15 11:56:11.622041+02
+last_analyze     |
+last_autoanalyze | 2008-04-15 11:56:11.622041+02
+</pre></div>
+
+
+<p>for both manual au auto vacuum processes.</p>
+<p>Logs are available through the conf parameter <code>log_autovacuum_min_duration</code> to trace long vacuum queries.</p>
+<p>Some good metrics to monitor - they are expected to be stable in time :</p>
+<ul>
+<li><code>pg_stat_all_tables.n_dead_tup</code> – number of dead tuples in each table (both user tables and system catalogs)</li>
+<li><code>(n_dead_tup / n_live_tup)</code> – ratio of dead/live tuples in each table</li>
+<li><code>(pg_class.relpages / pg_class.reltuples)</code> – space “per row”</li>
+</ul>
+<p>New view in 9.6 provides information about in-progress vacuums : <a href="https://www.postgresql.org/docs/9.6/static/progress-reporting.html">pg_stat_progress_vacuum</a>.</p>
+<p>An extension is available for more stats : <a href="https://www.postgresql.org/docs/current/static/pgstattuple.html">pgstattuple</a>.</p>
+<h2 id="tables-index-size">Tables &amp; index size<a class="headerlink" href="#tables-index-size" title="Permanent link">&para;</a></h2>
+<p>Tables and index sizes could be get by :</p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> 
+    <span class="k">table_name</span><span class="p">,</span> 
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_table_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">))</span> <span class="k">AS</span> <span class="n">table_size</span><span class="p">,</span> 
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_indexes_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">))</span> <span class="k">AS</span> <span class="n">index_size</span><span class="p">,</span>
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">))</span> <span class="k">as</span> <span class="n">total_size</span>
+<span class="k">FROM</span> 
+<span class="p">(</span>
+  <span class="k">SELECT</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">||</span> <span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="k">table_name</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span> <span class="k">WHERE</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;public&#39;</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">all_tables1</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span> <span class="k">desc</span><span class="p">;</span>
+</pre></div>
+
+
+<p>which outputs :</p>
+<table>
+<thead>
+<tr>
+<th>table_name</th>
+<th>table_size</th>
+<th>index_size</th>
+<th>total_size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public.table1</td>
+<td>2102 MB</td>
+<td>738 MB</td>
+<td>2840 MB</td>
+</tr>
+<tr>
+<td>public.table2</td>
+<td>77 MB</td>
+<td>130 MB</td>
+<td>207 MB</td>
+</tr>
+<tr>
+<td>public.table3</td>
+<td>79 MB</td>
+<td>98 MB</td>
+<td>177 MB</td>
+</tr>
+</tbody>
+</table>
+<p>The total for user tables is get by : </p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> 
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">pg_table_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">table_size</span><span class="p">,</span> 
+    <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">pg_indexes_size</span><span class="p">(</span><span class="k">table_name</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">index_size</span> 
+<span class="k">FROM</span> 
+<span class="p">(</span>
+  <span class="k">SELECT</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">||</span> <span class="n">table_schema</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="k">table_name</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span> <span class="k">WHERE</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;public&#39;</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">all_tables1</span><span class="p">;</span>
+</pre></div>
+
+
+<p>which outputs : </p>
+<table>
+<thead>
+<tr>
+<th>table_size</th>
+<th>index_size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>422 GB</td>
+<td>277 GB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="table-bloating">Table Bloating<a class="headerlink" href="#table-bloating" title="Permanent link">&para;</a></h2>
+<p>Bloating queries come from there : <a href="https://github.com/rach/pome/blob/develop/query.go">https://github.com/rach/pome/blob/develop/query.go</a>.</p>
+<h4 id="stats-per-table">Stats per table<a class="headerlink" href="#stats-per-table" title="Permanent link">&para;</a></h4>
+<p>Estimate system tables bloat size / ratio with this query :</p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="n">schemaname</span> <span class="k">as</span> <span class="k">schema</span><span class="p">,</span> <span class="n">tblname</span> <span class="k">as</span> <span class="k">table</span><span class="p">,</span>
+  <span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="n">tblpages</span><span class="o">-</span><span class="n">est_tblpages_ff</span><span class="p">)</span><span class="o">*</span><span class="n">bs</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">THEN</span> <span class="p">((</span><span class="n">tblpages</span><span class="o">-</span><span class="n">est_tblpages_ff</span><span class="p">)</span><span class="o">*</span><span class="n">bs</span><span class="p">)::</span><span class="nb">bigint</span>
+    <span class="k">ELSE</span> <span class="mi">0</span>
+  <span class="k">END</span> <span class="k">AS</span> <span class="n">bloat_bytes</span><span class="p">,</span>
+  <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">tblpages</span> <span class="o">-</span> <span class="n">est_tblpages_ff</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">THEN</span> <span class="n">round</span><span class="p">((</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">tblpages</span> <span class="o">-</span> <span class="n">est_tblpages_ff</span><span class="p">)</span><span class="o">/</span><span class="n">tblpages</span><span class="p">::</span><span class="nb">float</span><span class="p">)::</span><span class="nb">numeric</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">ELSE</span> <span class="mi">0</span>
+  <span class="k">END</span> <span class="k">AS</span> <span class="n">bloat_ratio</span>
+<span class="k">FROM</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">reltuples</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">page_hdr</span><span class="p">)</span><span class="o">/</span><span class="n">tpl_size</span> <span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">toasttuples</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">est_tblpages</span><span class="p">,</span>
+    <span class="n">ceil</span><span class="p">(</span> <span class="n">reltuples</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">page_hdr</span><span class="p">)</span><span class="o">*</span><span class="n">fillfactor</span><span class="o">/</span><span class="p">(</span><span class="n">tpl_size</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">toasttuples</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">est_tblpages_ff</span><span class="p">,</span>
+    <span class="n">tblpages</span><span class="p">,</span> <span class="n">fillfactor</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">heappages</span><span class="p">,</span> <span class="n">toastpages</span><span class="p">,</span> <span class="n">is_na</span>
+  <span class="k">FROM</span> <span class="p">(</span>
+    <span class="k">SELECT</span>
+      <span class="p">(</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">tpl_hdr_size</span> <span class="o">+</span> <span class="n">tpl_data_size</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">ma</span><span class="p">)</span>
+        <span class="o">-</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">tpl_hdr_size</span><span class="o">%</span><span class="n">ma</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">ma</span> <span class="k">ELSE</span> <span class="n">tpl_hdr_size</span><span class="o">%</span><span class="n">ma</span> <span class="k">END</span>
+        <span class="o">-</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">ceil</span><span class="p">(</span><span class="n">tpl_data_size</span><span class="p">)::</span><span class="nb">int</span><span class="o">%</span><span class="n">ma</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">ma</span> <span class="k">ELSE</span> <span class="n">ceil</span><span class="p">(</span><span class="n">tpl_data_size</span><span class="p">)::</span><span class="nb">int</span><span class="o">%</span><span class="n">ma</span> <span class="k">END</span>
+      <span class="p">)</span> <span class="k">AS</span> <span class="n">tpl_size</span><span class="p">,</span> <span class="n">bs</span> <span class="o">-</span> <span class="n">page_hdr</span> <span class="k">AS</span> <span class="n">size_per_block</span><span class="p">,</span> <span class="p">(</span><span class="n">heappages</span> <span class="o">+</span> <span class="n">toastpages</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tblpages</span><span class="p">,</span> <span class="n">heappages</span><span class="p">,</span>
+      <span class="n">toastpages</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span> <span class="n">toasttuples</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">page_hdr</span><span class="p">,</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">fillfactor</span><span class="p">,</span> <span class="n">is_na</span>
+    <span class="k">FROM</span> <span class="p">(</span>
+      <span class="k">SELECT</span>
+        <span class="n">tbl</span><span class="p">.</span><span class="n">oid</span> <span class="k">AS</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">ns</span><span class="p">.</span><span class="n">nspname</span> <span class="k">AS</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relname</span> <span class="k">AS</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span>
+        <span class="n">tbl</span><span class="p">.</span><span class="n">relpages</span> <span class="k">AS</span> <span class="n">heappages</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="k">toast</span><span class="p">.</span><span class="n">relpages</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">toastpages</span><span class="p">,</span>
+        <span class="n">coalesce</span><span class="p">(</span><span class="k">toast</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">toasttuples</span><span class="p">,</span>
+        <span class="n">coalesce</span><span class="p">(</span><span class="k">substring</span><span class="p">(</span>
+          <span class="n">array_to_string</span><span class="p">(</span><span class="n">tbl</span><span class="p">.</span><span class="n">reloptions</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+          <span class="k">FROM</span> <span class="s1">&#39;%fillfactor=#&quot;__#&quot;%&#39;</span> <span class="k">FOR</span> <span class="s1">&#39;#&#39;</span><span class="p">)::</span><span class="nb">smallint</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">AS</span> <span class="n">fillfactor</span><span class="p">,</span>
+        <span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">bs</span><span class="p">,</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">version</span><span class="p">()</span><span class="o">~</span><span class="s1">&#39;mingw32&#39;</span> <span class="k">OR</span> <span class="k">version</span><span class="p">()</span><span class="o">~</span><span class="s1">&#39;64-bit|x86_64|ppc64|ia64|amd64&#39;</span> <span class="k">THEN</span> <span class="mi">8</span> <span class="k">ELSE</span> <span class="mi">4</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">ma</span><span class="p">,</span>
+        <span class="mi">24</span> <span class="k">AS</span> <span class="n">page_hdr</span><span class="p">,</span>
+        <span class="mi">23</span> <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">MAX</span><span class="p">(</span><span class="n">coalesce</span><span class="p">(</span><span class="n">null_frac</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="p">(</span> <span class="mi">7</span> <span class="o">+</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="k">ELSE</span> <span class="mi">0</span><span class="p">::</span><span class="nb">int</span> <span class="k">END</span>
+          <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relhasoids</span> <span class="k">THEN</span> <span class="mi">4</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">tpl_hdr_size</span><span class="p">,</span>
+        <span class="k">sum</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">avg_width</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">tpl_data_size</span><span class="p">,</span>
+        <span class="n">bool_or</span><span class="p">(</span><span class="n">att</span><span class="p">.</span><span class="n">atttypid</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog.name&#39;</span><span class="p">::</span><span class="n">regtype</span><span class="p">)</span> <span class="k">AS</span> <span class="n">is_na</span>
+      <span class="k">FROM</span> <span class="n">pg_attribute</span> <span class="k">AS</span> <span class="n">att</span>
+        <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="n">tbl</span> <span class="k">ON</span> <span class="n">att</span><span class="p">.</span><span class="n">attrelid</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">oid</span>
+        <span class="k">JOIN</span> <span class="n">pg_namespace</span> <span class="k">AS</span> <span class="n">ns</span> <span class="k">ON</span> <span class="n">ns</span><span class="p">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relnamespace</span>
+        <span class="k">JOIN</span> <span class="n">pg_stats</span> <span class="k">AS</span> <span class="n">s</span> <span class="k">ON</span> <span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="o">=</span><span class="n">ns</span><span class="p">.</span><span class="n">nspname</span>
+          <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">tablename</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relname</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">inherited</span><span class="o">=</span><span class="k">false</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">attname</span><span class="o">=</span><span class="n">att</span><span class="p">.</span><span class="n">attname</span>
+        <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="k">toast</span> <span class="k">ON</span> <span class="n">tbl</span><span class="p">.</span><span class="n">reltoastrelid</span> <span class="o">=</span> <span class="k">toast</span><span class="p">.</span><span class="n">oid</span>
+      <span class="k">WHERE</span> <span class="n">att</span><span class="p">.</span><span class="n">attnum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">AND</span> <span class="k">NOT</span> <span class="n">att</span><span class="p">.</span><span class="n">attisdropped</span>
+        <span class="k">AND</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relkind</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span> <span class="k">AND</span> <span class="n">ns</span><span class="p">.</span><span class="n">nspname</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog&#39;</span>
+      <span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relhasoids</span>
+      <span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">s2</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">s3</span> <span class="k">order</span> <span class="k">by</span> <span class="n">bloat_ratio</span> <span class="k">desc</span><span class="p">;</span>
+</pre></div>
+
+
+<p>For user tables, set the schemaname value with <code>AND ns.nspname='public'</code> and possibly add a relname filter with <code>AND tbl.relname like '%Myfilter%'</code> .</p>
+<p>Example of output indicating some bad bloating ratio :</p>
+<div class="codehilite"><pre><span></span>   schema   |       table        | bloat_bytes | bloat_ratio 
+------------+--------------------+-------------+-------------
+ pg_catalog | pg_class           |    39116800 |        68.3
+ pg_catalog | pg_index           |    17539072 |        61.8
+ pg_catalog | pg_depend          |    15507456 |        57.2
+ pg_catalog | pg_type            |    15269888 |        56.1
+ pg_catalog | pg_attribute       |    99336192 |        55.6
+ pg_catalog | pg_constraint      |      172032 |        36.2
+ pg_catalog | pg_shdepend        |      598016 |        14.5
+ pg_catalog | pg_description     |       16384 |         5.9
+</pre></div>
+
+
+<p>To illustrate Vacuum effect on table bloating : </p>
+<div class="codehilite"><pre><span></span># Gather bloating stats before vacuum
+   schema   |       table        | bloat_bytes | bloat_ratio 
+------------+--------------------+-------------+-------------
+ public     | my_bloated_table   |   128622592 | 68.698315467075
+
+# Then vacuum
+vacuum (full, analyze) my_bloated_table;
+
+# Finally refresh stats
+   schema   |       table        | bloat_bytes | bloat_ratio 
+------------+--------------------+-------------+-------------
+ public     | my_bloated_table   |   6520832   | 9.74176967323461
+</pre></div>
+
+
+<p>It's much better !</p>
+<h4 id="stats-total">Stats total<a class="headerlink" href="#stats-total" title="Permanent link">&para;</a></h4>
+<p>To get total bloating of all databases of a server, execute :</p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">real_size</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">as</span> <span class="n">real_size</span><span class="p">,</span>
+       <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">bloat_bytes</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">as</span> <span class="n">bloat_size</span> <span class="k">FROM</span> 
+<span class="p">(</span>
+  <span class="k">SELECT</span> 
+    <span class="n">bs</span><span class="o">*</span><span class="n">tblpages</span> <span class="k">AS</span> <span class="n">real_size</span><span class="p">,</span>
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="n">tblpages</span><span class="o">-</span><span class="n">est_tblpages_ff</span><span class="p">)</span><span class="o">*</span><span class="n">bs</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="k">THEN</span> <span class="p">((</span><span class="n">tblpages</span><span class="o">-</span><span class="n">est_tblpages_ff</span><span class="p">)</span><span class="o">*</span><span class="n">bs</span><span class="p">)::</span><span class="nb">bigint</span>
+      <span class="k">ELSE</span> <span class="mi">0</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">bloat_bytes</span>
+  <span class="k">FROM</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">reltuples</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">page_hdr</span><span class="p">)</span><span class="o">/</span><span class="n">tpl_size</span> <span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">toasttuples</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">est_tblpages</span><span class="p">,</span>
+      <span class="n">ceil</span><span class="p">(</span> <span class="n">reltuples</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">page_hdr</span><span class="p">)</span><span class="o">*</span><span class="n">fillfactor</span><span class="o">/</span><span class="p">(</span><span class="n">tpl_size</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">toasttuples</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">est_tblpages_ff</span><span class="p">,</span>
+      <span class="n">tblpages</span><span class="p">,</span> <span class="n">fillfactor</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">heappages</span><span class="p">,</span> <span class="n">toastpages</span><span class="p">,</span> <span class="n">is_na</span>
+    <span class="k">FROM</span> <span class="p">(</span>
+      <span class="k">SELECT</span>
+        <span class="p">(</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">tpl_hdr_size</span> <span class="o">+</span> <span class="n">tpl_data_size</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">ma</span><span class="p">)</span>
+          <span class="o">-</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">tpl_hdr_size</span><span class="o">%</span><span class="n">ma</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">ma</span> <span class="k">ELSE</span> <span class="n">tpl_hdr_size</span><span class="o">%</span><span class="n">ma</span> <span class="k">END</span>
+          <span class="o">-</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">ceil</span><span class="p">(</span><span class="n">tpl_data_size</span><span class="p">)::</span><span class="nb">int</span><span class="o">%</span><span class="n">ma</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">ma</span> <span class="k">ELSE</span> <span class="n">ceil</span><span class="p">(</span><span class="n">tpl_data_size</span><span class="p">)::</span><span class="nb">int</span><span class="o">%</span><span class="n">ma</span> <span class="k">END</span>
+        <span class="p">)</span> <span class="k">AS</span> <span class="n">tpl_size</span><span class="p">,</span> <span class="n">bs</span> <span class="o">-</span> <span class="n">page_hdr</span> <span class="k">AS</span> <span class="n">size_per_block</span><span class="p">,</span> <span class="p">(</span><span class="n">heappages</span> <span class="o">+</span> <span class="n">toastpages</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tblpages</span><span class="p">,</span> <span class="n">heappages</span><span class="p">,</span>
+        <span class="n">toastpages</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span> <span class="n">toasttuples</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">page_hdr</span><span class="p">,</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">fillfactor</span><span class="p">,</span> <span class="n">is_na</span>
+      <span class="k">FROM</span> <span class="p">(</span>
+        <span class="k">SELECT</span>
+          <span class="n">tbl</span><span class="p">.</span><span class="n">oid</span> <span class="k">AS</span> <span class="n">tblid</span><span class="p">,</span> <span class="n">ns</span><span class="p">.</span><span class="n">nspname</span> <span class="k">AS</span> <span class="n">schemaname</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relname</span> <span class="k">AS</span> <span class="n">tblname</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span>
+          <span class="n">tbl</span><span class="p">.</span><span class="n">relpages</span> <span class="k">AS</span> <span class="n">heappages</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="k">toast</span><span class="p">.</span><span class="n">relpages</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">toastpages</span><span class="p">,</span>
+          <span class="n">coalesce</span><span class="p">(</span><span class="k">toast</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">toasttuples</span><span class="p">,</span>
+          <span class="n">coalesce</span><span class="p">(</span><span class="k">substring</span><span class="p">(</span>
+            <span class="n">array_to_string</span><span class="p">(</span><span class="n">tbl</span><span class="p">.</span><span class="n">reloptions</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">FROM</span> <span class="s1">&#39;%fillfactor=#&quot;__#&quot;%&#39;</span> <span class="k">FOR</span> <span class="s1">&#39;#&#39;</span><span class="p">)::</span><span class="nb">smallint</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">AS</span> <span class="n">fillfactor</span><span class="p">,</span>
+          <span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">bs</span><span class="p">,</span>
+          <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">version</span><span class="p">()</span><span class="o">~</span><span class="s1">&#39;mingw32&#39;</span> <span class="k">OR</span> <span class="k">version</span><span class="p">()</span><span class="o">~</span><span class="s1">&#39;64-bit|x86_64|ppc64|ia64|amd64&#39;</span> <span class="k">THEN</span> <span class="mi">8</span> <span class="k">ELSE</span> <span class="mi">4</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">ma</span><span class="p">,</span>
+          <span class="mi">24</span> <span class="k">AS</span> <span class="n">page_hdr</span><span class="p">,</span>
+          <span class="mi">23</span> <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">MAX</span><span class="p">(</span><span class="n">coalesce</span><span class="p">(</span><span class="n">null_frac</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="p">(</span> <span class="mi">7</span> <span class="o">+</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="k">ELSE</span> <span class="mi">0</span><span class="p">::</span><span class="nb">int</span> <span class="k">END</span>
+            <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relhasoids</span> <span class="k">THEN</span> <span class="mi">4</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">tpl_hdr_size</span><span class="p">,</span>
+          <span class="k">sum</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">avg_width</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">tpl_data_size</span><span class="p">,</span>
+          <span class="n">bool_or</span><span class="p">(</span><span class="n">att</span><span class="p">.</span><span class="n">atttypid</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog.name&#39;</span><span class="p">::</span><span class="n">regtype</span><span class="p">)</span> <span class="k">AS</span> <span class="n">is_na</span>
+        <span class="k">FROM</span> <span class="n">pg_attribute</span> <span class="k">AS</span> <span class="n">att</span>
+          <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="n">tbl</span> <span class="k">ON</span> <span class="n">att</span><span class="p">.</span><span class="n">attrelid</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">oid</span>
+          <span class="k">JOIN</span> <span class="n">pg_namespace</span> <span class="k">AS</span> <span class="n">ns</span> <span class="k">ON</span> <span class="n">ns</span><span class="p">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relnamespace</span>
+          <span class="k">JOIN</span> <span class="n">pg_stats</span> <span class="k">AS</span> <span class="n">s</span> <span class="k">ON</span> <span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="o">=</span><span class="n">ns</span><span class="p">.</span><span class="n">nspname</span>
+            <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">tablename</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relname</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">inherited</span><span class="o">=</span><span class="k">false</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">attname</span><span class="o">=</span><span class="n">att</span><span class="p">.</span><span class="n">attname</span>
+          <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="k">toast</span> <span class="k">ON</span> <span class="n">tbl</span><span class="p">.</span><span class="n">reltoastrelid</span> <span class="o">=</span> <span class="k">toast</span><span class="p">.</span><span class="n">oid</span>
+        <span class="k">WHERE</span> <span class="n">att</span><span class="p">.</span><span class="n">attnum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">AND</span> <span class="k">NOT</span> <span class="n">att</span><span class="p">.</span><span class="n">attisdropped</span>
+          <span class="k">AND</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relkind</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span> <span class="k">AND</span> <span class="n">ns</span><span class="p">.</span><span class="n">nspname</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog&#39;</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">tbl</span><span class="p">.</span><span class="n">relhasoids</span>
+        <span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+      <span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">s2</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">s3</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">s4</span><span class="p">;</span>
+</pre></div>
+
+
+<p>It outputs for example : </p>
+<div class="codehilite"><pre><span></span>  real_size | bloat_size 
+ -----------+-------------
+  310 MB    | 179 MB
+</pre></div>
+
+
+<h2 id="index-bloating">Index bloating<a class="headerlink" href="#index-bloating" title="Permanent link">&para;</a></h2>
+<p>Bloating queries come from there : <a href="https://github.com/rach/pome/blob/develop/query.go">https://github.com/rach/pome/blob/develop/query.go</a>.</p>
+<h4 id="stats-per-index">Stats per index<a class="headerlink" href="#stats-per-index" title="Permanent link">&para;</a></h4>
+<p>Estimate system index bloat size / ratio with this query :</p>
+<div class="codehilite"><pre><span></span><span class="k">WITH</span> <span class="n">btree_index_atts</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">relname</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span> <span class="n">relpages</span><span class="p">,</span> <span class="n">indrelid</span><span class="p">,</span> <span class="n">relam</span><span class="p">,</span>
+        <span class="n">regexp_split_to_table</span><span class="p">(</span><span class="n">indkey</span><span class="p">::</span><span class="nb">text</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)::</span><span class="nb">smallint</span> <span class="k">AS</span> <span class="n">attnum</span><span class="p">,</span>
+        <span class="n">indexrelid</span> <span class="k">as</span> <span class="n">index_oid</span>
+    <span class="k">FROM</span> <span class="n">pg_index</span>
+    <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">ON</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">oid</span><span class="o">=</span><span class="n">pg_index</span><span class="p">.</span><span class="n">indexrelid</span>
+    <span class="k">JOIN</span> <span class="n">pg_namespace</span> <span class="k">ON</span> <span class="n">pg_namespace</span><span class="p">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">relnamespace</span>
+    <span class="k">JOIN</span> <span class="n">pg_am</span> <span class="k">ON</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">relam</span> <span class="o">=</span> <span class="n">pg_am</span><span class="p">.</span><span class="n">oid</span>
+    <span class="k">WHERE</span> <span class="n">pg_am</span><span class="p">.</span><span class="n">amname</span> <span class="o">=</span> <span class="s1">&#39;btree&#39;</span> <span class="k">AND</span> <span class="n">pg_namespace</span><span class="p">.</span><span class="n">nspname</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog&#39;</span>
+    <span class="p">),</span>
+<span class="n">index_item_sizes</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="n">i</span><span class="p">.</span><span class="n">nspname</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relpages</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relam</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">tablename</span><span class="p">))::</span><span class="n">regclass</span> <span class="k">AS</span> <span class="n">starelid</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AS</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span>
+    <span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">bs</span><span class="p">,</span>
+    <span class="cm">/* MAXALIGN: 4 on 32bits, 8 on 64bits (and mingw32 ?) */</span>
+    <span class="k">CASE</span>
+        <span class="k">WHEN</span> <span class="k">version</span><span class="p">()</span> <span class="o">~</span> <span class="s1">&#39;mingw32&#39;</span> <span class="k">OR</span> <span class="k">version</span><span class="p">()</span> <span class="o">~</span> <span class="s1">&#39;64-bit&#39;</span> <span class="k">THEN</span> <span class="mi">8</span>
+        <span class="k">ELSE</span> <span class="mi">4</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">maxalign</span><span class="p">,</span>
+    <span class="mi">24</span> <span class="k">AS</span> <span class="n">pagehdr</span><span class="p">,</span>
+    <span class="cm">/* per tuple header: add index_attribute_bm if some cols are null-able */</span>
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">max</span><span class="p">(</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">THEN</span> <span class="mi">2</span>
+        <span class="k">ELSE</span> <span class="mi">6</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">index_tuple_hdr</span><span class="p">,</span>
+    <span class="cm">/* data len: we remove null values save space using it fractionnal part from stats */</span>
+    <span class="k">sum</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">avg_width</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">nulldatawidth</span>
+    <span class="k">FROM</span> <span class="n">pg_attribute</span> <span class="k">AS</span> <span class="n">a</span>
+    <span class="k">JOIN</span> <span class="n">pg_stats</span> <span class="k">AS</span> <span class="n">s</span> <span class="k">ON</span> <span class="p">(</span><span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">tablename</span><span class="p">))::</span><span class="n">regclass</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">attname</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">attname</span> 
+    <span class="k">JOIN</span> <span class="n">btree_index_atts</span> <span class="k">AS</span> <span class="n">i</span> <span class="k">ON</span> <span class="n">i</span><span class="p">.</span><span class="n">indrelid</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">attnum</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="n">attnum</span>
+    <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">attnum</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span>
+<span class="p">),</span>
+<span class="n">index_aligned</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">maxalign</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">relname</span> <span class="k">AS</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span>
+        <span class="n">relpages</span><span class="p">,</span> <span class="n">relam</span><span class="p">,</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span>
+      <span class="p">(</span> <span class="mi">2</span> <span class="o">+</span>
+          <span class="n">maxalign</span> <span class="o">-</span> <span class="k">CASE</span> <span class="cm">/* Add padding to the index tuple header to align on MAXALIGN */</span>
+            <span class="k">WHEN</span> <span class="n">index_tuple_hdr</span><span class="o">%</span><span class="n">maxalign</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">maxalign</span>
+            <span class="k">ELSE</span> <span class="n">index_tuple_hdr</span><span class="o">%</span><span class="n">maxalign</span>
+          <span class="k">END</span>
+        <span class="o">+</span> <span class="n">nulldatawidth</span> <span class="o">+</span> <span class="n">maxalign</span> <span class="o">-</span> <span class="k">CASE</span> <span class="cm">/* Add padding to the data to align on MAXALIGN */</span>
+            <span class="k">WHEN</span> <span class="n">nulldatawidth</span><span class="p">::</span><span class="nb">integer</span><span class="o">%</span><span class="n">maxalign</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">maxalign</span>
+            <span class="k">ELSE</span> <span class="n">nulldatawidth</span><span class="p">::</span><span class="nb">integer</span><span class="o">%</span><span class="n">maxalign</span>
+          <span class="k">END</span>
+      <span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">nulldatahdrwidth</span><span class="p">,</span> <span class="n">pagehdr</span>
+    <span class="k">FROM</span> <span class="n">index_item_sizes</span> <span class="k">AS</span> <span class="n">s1</span>
+<span class="p">),</span>
+<span class="n">otta_calc</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">bs</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">relpages</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span>
+    <span class="n">ceil</span><span class="p">((</span><span class="n">reltuples</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">nulldatahdrwidth</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">pagehdr</span><span class="p">::</span><span class="nb">float</span><span class="p">))</span> <span class="o">+</span>
+      <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">am</span><span class="p">.</span><span class="n">amname</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;hash&#39;</span><span class="p">,</span><span class="s1">&#39;btree&#39;</span><span class="p">)</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="p">,</span> <span class="mi">0</span> <span class="c1">-- btree and hash have a metadata reserved block</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">otta</span>
+  <span class="k">FROM</span> <span class="n">index_aligned</span> <span class="k">AS</span> <span class="n">s2</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">pg_am</span> <span class="n">am</span> <span class="k">ON</span> <span class="n">s2</span><span class="p">.</span><span class="n">relam</span> <span class="o">=</span> <span class="n">am</span><span class="p">.</span><span class="n">oid</span>
+<span class="p">),</span>
+<span class="n">raw_bloat</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">current_database</span><span class="p">()</span> <span class="k">as</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">relname</span> <span class="k">AS</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span>
+        <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">AS</span> <span class="n">totalbytes</span><span class="p">,</span>
+        <span class="k">CASE</span>
+            <span class="k">WHEN</span> <span class="n">sub</span><span class="p">.</span><span class="n">relpages</span> <span class="o">&lt;=</span> <span class="n">otta</span> <span class="k">THEN</span> <span class="mi">0</span>
+            <span class="k">ELSE</span> <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="o">-</span><span class="n">otta</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">END</span>
+            <span class="k">AS</span> <span class="n">wastedbytes</span><span class="p">,</span>
+        <span class="k">CASE</span>
+            <span class="k">WHEN</span> <span class="n">sub</span><span class="p">.</span><span class="n">relpages</span> <span class="o">&lt;=</span> <span class="n">otta</span>
+            <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="o">-</span><span class="n">otta</span><span class="p">)::</span><span class="nb">bigint</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">END</span>
+            <span class="k">AS</span> <span class="n">realbloat</span><span class="p">,</span>
+        <span class="n">pg_relation_size</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">table_oid</span><span class="p">)</span> <span class="k">as</span> <span class="n">table_bytes</span>
+    <span class="k">FROM</span> <span class="n">otta_calc</span> <span class="k">AS</span> <span class="n">sub</span>
+    <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="k">c</span> <span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">oid</span><span class="o">=</span><span class="n">sub</span><span class="p">.</span><span class="n">table_oid</span>
+<span class="p">)</span>
+<span class="k">SELECT</span>  <span class="n">nspname</span> <span class="k">AS</span> <span class="k">schema</span><span class="p">,</span>
+        <span class="n">tablename</span> <span class="k">as</span> <span class="k">table</span><span class="p">,</span>
+        <span class="n">index_name</span> <span class="k">AS</span> <span class="k">index</span><span class="p">,</span>
+        <span class="n">wastedbytes</span> <span class="k">as</span> <span class="n">bloat_bytes</span><span class="p">,</span>
+        <span class="n">round</span><span class="p">(</span><span class="n">realbloat</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">bloat_ratio</span><span class="p">,</span> 
+        <span class="n">totalbytes</span> <span class="k">as</span> <span class="n">index_size</span>
+<span class="k">FROM</span> <span class="n">raw_bloat</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">wastedbytes</span> <span class="k">DESC</span><span class="p">;</span>
+</pre></div>
+
+
+<p>For user tables, set the schemaname value with <code>AND pg_namespace.nspname='public'</code> and possibly add a relname filter with <code>WHERE tablename='probes_global_statistics'</code> before the last <code>ORDER BY</code>.</p>
+<h4 id="stats-total_1">Stats total<a class="headerlink" href="#stats-total_1" title="Permanent link">&para;</a></h4>
+<p>To get total bloating of all databases of a server, execute :</p>
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">index_size</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">as</span> <span class="n">index_size</span><span class="p">,</span>
+       <span class="n">pg_size_pretty</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">bloat_bytes</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">as</span> <span class="n">bloat_size</span>
+<span class="k">FROM</span> <span class="p">(</span>
+
+<span class="k">WITH</span> <span class="n">btree_index_atts</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">relname</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span> <span class="n">relpages</span><span class="p">,</span> <span class="n">indrelid</span><span class="p">,</span> <span class="n">relam</span><span class="p">,</span>
+        <span class="n">regexp_split_to_table</span><span class="p">(</span><span class="n">indkey</span><span class="p">::</span><span class="nb">text</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)::</span><span class="nb">smallint</span> <span class="k">AS</span> <span class="n">attnum</span><span class="p">,</span>
+        <span class="n">indexrelid</span> <span class="k">as</span> <span class="n">index_oid</span>
+    <span class="k">FROM</span> <span class="n">pg_index</span>
+    <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">ON</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">oid</span><span class="o">=</span><span class="n">pg_index</span><span class="p">.</span><span class="n">indexrelid</span>
+    <span class="k">JOIN</span> <span class="n">pg_namespace</span> <span class="k">ON</span> <span class="n">pg_namespace</span><span class="p">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">relnamespace</span>
+    <span class="k">JOIN</span> <span class="n">pg_am</span> <span class="k">ON</span> <span class="n">pg_class</span><span class="p">.</span><span class="n">relam</span> <span class="o">=</span> <span class="n">pg_am</span><span class="p">.</span><span class="n">oid</span>
+    <span class="k">WHERE</span> <span class="n">pg_am</span><span class="p">.</span><span class="n">amname</span> <span class="o">=</span> <span class="s1">&#39;btree&#39;</span> <span class="k">AND</span> <span class="n">pg_namespace</span><span class="p">.</span><span class="n">nspname</span> <span class="o">=</span> <span class="s1">&#39;pg_catalog&#39;</span>
+    <span class="p">),</span>
+<span class="n">index_item_sizes</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="n">i</span><span class="p">.</span><span class="n">nspname</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relname</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">reltuples</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relpages</span><span class="p">,</span> <span class="n">i</span><span class="p">.</span><span class="n">relam</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">tablename</span><span class="p">))::</span><span class="n">regclass</span> <span class="k">AS</span> <span class="n">starelid</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AS</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span>
+    <span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">bs</span><span class="p">,</span>
+    <span class="cm">/* MAXALIGN: 4 on 32bits, 8 on 64bits (and mingw32 ?) */</span>
+    <span class="k">CASE</span>
+        <span class="k">WHEN</span> <span class="k">version</span><span class="p">()</span> <span class="o">~</span> <span class="s1">&#39;mingw32&#39;</span> <span class="k">OR</span> <span class="k">version</span><span class="p">()</span> <span class="o">~</span> <span class="s1">&#39;64-bit&#39;</span> <span class="k">THEN</span> <span class="mi">8</span>
+        <span class="k">ELSE</span> <span class="mi">4</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">maxalign</span><span class="p">,</span>
+    <span class="mi">24</span> <span class="k">AS</span> <span class="n">pagehdr</span><span class="p">,</span>
+    <span class="cm">/* per tuple header: add index_attribute_bm if some cols are null-able */</span>
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">max</span><span class="p">(</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">THEN</span> <span class="mi">2</span>
+        <span class="k">ELSE</span> <span class="mi">6</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">index_tuple_hdr</span><span class="p">,</span>
+    <span class="cm">/* data len: we remove null values save space using it fractionnal part from stats */</span>
+    <span class="k">sum</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">null_frac</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">avg_width</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">nulldatawidth</span>
+    <span class="k">FROM</span> <span class="n">pg_attribute</span> <span class="k">AS</span> <span class="n">a</span>
+    <span class="k">JOIN</span> <span class="n">pg_stats</span> <span class="k">AS</span> <span class="n">s</span> <span class="k">ON</span> <span class="p">(</span><span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">schemaname</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> <span class="n">quote_ident</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">tablename</span><span class="p">))::</span><span class="n">regclass</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AND</span> <span class="n">s</span><span class="p">.</span><span class="n">attname</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">attname</span> 
+    <span class="k">JOIN</span> <span class="n">btree_index_atts</span> <span class="k">AS</span> <span class="n">i</span> <span class="k">ON</span> <span class="n">i</span><span class="p">.</span><span class="n">indrelid</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">attrelid</span> <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">attnum</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="n">attnum</span>
+    <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">attnum</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span>
+<span class="p">),</span>
+<span class="n">index_aligned</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">maxalign</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">relname</span> <span class="k">AS</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">reltuples</span><span class="p">,</span>
+        <span class="n">relpages</span><span class="p">,</span> <span class="n">relam</span><span class="p">,</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span>
+      <span class="p">(</span> <span class="mi">2</span> <span class="o">+</span>
+          <span class="n">maxalign</span> <span class="o">-</span> <span class="k">CASE</span> <span class="cm">/* Add padding to the index tuple header to align on MAXALIGN */</span>
+            <span class="k">WHEN</span> <span class="n">index_tuple_hdr</span><span class="o">%</span><span class="n">maxalign</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">maxalign</span>
+            <span class="k">ELSE</span> <span class="n">index_tuple_hdr</span><span class="o">%</span><span class="n">maxalign</span>
+          <span class="k">END</span>
+        <span class="o">+</span> <span class="n">nulldatawidth</span> <span class="o">+</span> <span class="n">maxalign</span> <span class="o">-</span> <span class="k">CASE</span> <span class="cm">/* Add padding to the data to align on MAXALIGN */</span>
+            <span class="k">WHEN</span> <span class="n">nulldatawidth</span><span class="p">::</span><span class="nb">integer</span><span class="o">%</span><span class="n">maxalign</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="n">maxalign</span>
+            <span class="k">ELSE</span> <span class="n">nulldatawidth</span><span class="p">::</span><span class="nb">integer</span><span class="o">%</span><span class="n">maxalign</span>
+          <span class="k">END</span>
+      <span class="p">)::</span><span class="nb">numeric</span> <span class="k">AS</span> <span class="n">nulldatahdrwidth</span><span class="p">,</span> <span class="n">pagehdr</span>
+    <span class="k">FROM</span> <span class="n">index_item_sizes</span> <span class="k">AS</span> <span class="n">s1</span>
+<span class="p">),</span>
+<span class="n">otta_calc</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">bs</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="n">table_oid</span><span class="p">,</span> <span class="n">index_oid</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">relpages</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span>
+    <span class="n">ceil</span><span class="p">((</span><span class="n">reltuples</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">nulldatahdrwidth</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">bs</span><span class="o">-</span><span class="n">pagehdr</span><span class="p">::</span><span class="nb">float</span><span class="p">))</span> <span class="o">+</span>
+      <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">am</span><span class="p">.</span><span class="n">amname</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;hash&#39;</span><span class="p">,</span><span class="s1">&#39;btree&#39;</span><span class="p">)</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="p">,</span> <span class="mi">0</span> <span class="c1">-- btree and hash have a metadata reserved block</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">otta</span>
+  <span class="k">FROM</span> <span class="n">index_aligned</span> <span class="k">AS</span> <span class="n">s2</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">pg_am</span> <span class="n">am</span> <span class="k">ON</span> <span class="n">s2</span><span class="p">.</span><span class="n">relam</span> <span class="o">=</span> <span class="n">am</span><span class="p">.</span><span class="n">oid</span>
+<span class="p">),</span>
+<span class="n">raw_bloat</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">current_database</span><span class="p">()</span> <span class="k">as</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">nspname</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">relname</span> <span class="k">AS</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span>
+        <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">AS</span> <span class="n">totalbytes</span><span class="p">,</span>
+        <span class="k">CASE</span>
+            <span class="k">WHEN</span> <span class="n">sub</span><span class="p">.</span><span class="n">relpages</span> <span class="o">&lt;=</span> <span class="n">otta</span> <span class="k">THEN</span> <span class="mi">0</span>
+            <span class="k">ELSE</span> <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="o">-</span><span class="n">otta</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">END</span>
+            <span class="k">AS</span> <span class="n">wastedbytes</span><span class="p">,</span>
+        <span class="k">CASE</span>
+            <span class="k">WHEN</span> <span class="n">sub</span><span class="p">.</span><span class="n">relpages</span> <span class="o">&lt;=</span> <span class="n">otta</span>
+            <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="o">-</span><span class="n">otta</span><span class="p">)::</span><span class="nb">bigint</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="n">bs</span><span class="o">*</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">relpages</span><span class="p">)::</span><span class="nb">bigint</span><span class="p">)</span> <span class="k">END</span>
+            <span class="k">AS</span> <span class="n">realbloat</span><span class="p">,</span>
+        <span class="n">pg_relation_size</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">table_oid</span><span class="p">)</span> <span class="k">as</span> <span class="n">table_bytes</span>
+    <span class="k">FROM</span> <span class="n">otta_calc</span> <span class="k">AS</span> <span class="n">sub</span>
+    <span class="k">JOIN</span> <span class="n">pg_class</span> <span class="k">AS</span> <span class="k">c</span> <span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">oid</span><span class="o">=</span><span class="n">sub</span><span class="p">.</span><span class="n">table_oid</span>
+<span class="p">)</span>
+<span class="k">SELECT</span>  <span class="n">wastedbytes</span> <span class="k">as</span> <span class="n">bloat_bytes</span><span class="p">,</span>      
+        <span class="n">totalbytes</span> <span class="k">as</span> <span class="n">index_size</span>
+<span class="k">FROM</span> <span class="n">raw_bloat</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">s4</span><span class="p">;</span>
+</pre></div>
+
+
+<p>It outputs for example : </p>
+<div class="codehilite"><pre><span></span> index_size | bloat_size 
+------------+------------
+ 283 MB     | 199 MB
+</pre></div>
+
+
+<h2 id="cache-usage">Cache usage<a class="headerlink" href="#cache-usage" title="Permanent link">&para;</a></h2>
+<p>Amount of data read from disk and total for all user tables of a database and their indexes.</p>
+<div class="codehilite"><pre><span></span><span class="k">WITH</span> 
+<span class="n">stats_heap</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">heap_blks_read</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_tables</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">heap_blks_hit</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_tables</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_hit</span>
+<span class="p">),</span>
+<span class="n">stats_idx</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">idx_blks_read</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_indexes</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">idx_blks_hit</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_indexes</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_hit</span>
+<span class="p">),</span>
+<span class="n">bs</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span> 
+    <span class="k">cast</span><span class="p">(</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">integer</span><span class="p">)</span> <span class="k">AS</span> <span class="n">block_size</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">current_database</span><span class="p">()</span> <span class="k">AS</span> <span class="n">dbname</span><span class="p">,</span> <span class="p">(</span><span class="n">heap_read</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_read</span><span class="p">,</span> <span class="p">(</span><span class="n">heap_hit</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_hit</span><span class="p">,</span> <span class="p">((</span><span class="n">heap_hit</span><span class="p">::</span><span class="nb">float</span> <span class="o">-</span> <span class="n">heap_read</span><span class="p">::</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">heap_hit</span><span class="p">::</span><span class="nb">float</span><span class="p">)::</span><span class="nb">float</span> <span class="k">as</span> <span class="n">heap_ratio</span><span class="p">,</span>
+<span class="p">(</span><span class="n">idx_read</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_read</span><span class="p">,</span> <span class="p">(</span><span class="n">idx_hit</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_hit</span><span class="p">,</span> <span class="p">((</span><span class="n">idx_hit</span><span class="p">::</span><span class="nb">float</span> <span class="o">-</span> <span class="n">idx_read</span><span class="p">::</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">idx_hit</span><span class="p">::</span><span class="nb">float</span><span class="p">)::</span><span class="nb">float</span> <span class="k">as</span> <span class="n">idx_ratio</span> <span class="k">FROM</span> <span class="n">bs</span><span class="p">,</span> <span class="n">stats_heap</span><span class="p">,</span> <span class="n">stats_idx</span><span class="p">;</span>
+</pre></div>
+
+
+<p>This query could work for system tables by using the <code>pg_statio_sys_tables</code> table.</p>
+<p>Of course, it could be also written to analyze cache usage for a single table :</p>
+<div class="codehilite"><pre><span></span><span class="k">SET</span> <span class="n">you</span><span class="p">.</span><span class="k">table_name</span> <span class="o">=</span> <span class="s1">&#39;report&#39;</span><span class="p">;</span>
+<span class="k">WITH</span> 
+<span class="n">stats_heap</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="n">heap_blks_read</span> <span class="k">FROM</span> <span class="n">pg_statio_user_tables</span> <span class="k">where</span> <span class="n">relname</span><span class="o">=</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;you.table_name&#39;</span><span class="p">))::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="k">SELECT</span> <span class="n">heap_blks_hit</span> <span class="k">FROM</span> <span class="n">pg_statio_user_tables</span> <span class="k">where</span> <span class="n">relname</span><span class="o">=</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;you.table_name&#39;</span><span class="p">))::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_hit</span>
+<span class="p">),</span>
+<span class="n">stats_idx</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">idx_blks_read</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_indexes</span> <span class="k">where</span> <span class="n">relname</span><span class="o">=</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;you.table_name&#39;</span><span class="p">))::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">idx_blks_hit</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_statio_user_indexes</span> <span class="k">where</span> <span class="n">relname</span><span class="o">=</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;you.table_name&#39;</span><span class="p">))::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_hit</span>
+<span class="p">),</span>
+<span class="n">bs</span> <span class="k">AS</span>
+<span class="p">(</span>
+    <span class="k">SELECT</span> 
+    <span class="k">cast</span><span class="p">(</span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;block_size&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">integer</span><span class="p">)</span> <span class="k">AS</span> <span class="n">block_size</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> 
+    <span class="n">current_database</span><span class="p">()</span> <span class="k">AS</span> <span class="n">dbname</span><span class="p">,</span> 
+    <span class="p">(</span><span class="n">heap_read</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="n">heap_hit</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">heap_hit</span><span class="p">,</span> 
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">heap_hit</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">THEN</span> <span class="p">((</span><span class="n">heap_hit</span><span class="p">::</span><span class="nb">float</span> <span class="o">-</span> <span class="n">heap_read</span><span class="p">::</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">heap_hit</span><span class="p">::</span><span class="nb">float</span><span class="p">)::</span><span class="nb">float</span>
+        <span class="k">ELSE</span> <span class="mi">0</span>
+    <span class="k">END</span> <span class="k">as</span> <span class="n">heap_ratio</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">idx_read</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_read</span><span class="p">,</span> 
+    <span class="p">(</span><span class="n">idx_hit</span> <span class="o">*</span> <span class="n">block_size</span><span class="p">)::</span><span class="nb">bigint</span> <span class="k">as</span> <span class="n">idx_hit</span><span class="p">,</span> 
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">idx_hit</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">THEN</span> <span class="p">((</span><span class="n">idx_hit</span><span class="p">::</span><span class="nb">float</span> <span class="o">-</span> <span class="n">idx_read</span><span class="p">::</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">idx_hit</span><span class="p">::</span><span class="nb">float</span><span class="p">)::</span><span class="nb">float</span>
+        <span class="k">ELSE</span> <span class="mi">0</span>
+    <span class="k">END</span> <span class="k">as</span> <span class="n">idx_ratio</span> 
+<span class="k">FROM</span> <span class="n">bs</span><span class="p">,</span> <span class="n">stats_heap</span><span class="p">,</span> <span class="n">stats_idx</span><span class="p">;</span>
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It's rather difficult to know if the right formula for ratio is (heap - hit) / hit or hit / (read + hit).
+It depends if we consider that all disk read (read field) put data into the cache (hit field) or not !<br />
+Both exists on the Internet.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../autovacuum/" title="Autovacuum" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Autovacuum
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../monitoring/" title="Monitoring" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Monitoring
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

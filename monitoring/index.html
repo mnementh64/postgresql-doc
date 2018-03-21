@@ -1,0 +1,1020 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Monitoring - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#monitoring" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Monitoring
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Monitoring
+      </label>
+    
+    <a href="./" title="Monitoring" class="md-nav__link md-nav__link--active">
+      Monitoring
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" title="Architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#central-server" title="Central Server" class="md-nav__link">
+    Central Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" title="Docker-compose.yml" class="md-nav__link">
+    Docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-influxdb" title="Control influxdb" class="md-nav__link">
+    Control influxdb
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collector" title="Collector" class="md-nav__link">
+    Collector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml_1" title="Docker-compose.yml" class="md-nav__link">
+    Docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Pgsql perf" class="md-nav__link">
+      Pgsql perf
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../other_points/" title="Other points" class="md-nav__link">
+      Other points
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" title="Architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#central-server" title="Central Server" class="md-nav__link">
+    Central Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" title="Docker-compose.yml" class="md-nav__link">
+    Docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-influxdb" title="Control influxdb" class="md-nav__link">
+    Control influxdb
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collector" title="Collector" class="md-nav__link">
+    Collector
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml_1" title="Docker-compose.yml" class="md-nav__link">
+    Docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h1>
+<p>Explain how to deploy via Docker / configure a TIG stack : <a href="https://github.com/influxdata/telegraf">Telegraf</a>, <a href="https://docs.influxdata.com/influxdb/v1.4/introduction/">Influxdb</a> and <a href="https://grafana.com/">Grafana</a>.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h2 id="central-server">Central Server<a class="headerlink" href="#central-server" title="Permanent link">&para;</a></h2>
+<h4 id="docker-composeyml">Docker-compose.yml<a class="headerlink" href="#docker-composeyml" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>version: &#39;2&#39;
+
+services:
+    ## InfluxDB container
+    influxdb:
+        image: influxdb:latest
+        restart: always
+        ports:
+          - &quot;80:8086&quot;
+        volumes:
+          - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/influxdb:/var/lib/influxdb
+          - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+
+## Grafana container
+    grafana:
+        image: grafana/grafana
+        restart: always
+        ports:
+          - &quot;3000:3000&quot;
+        volumes:
+          - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/grafana/var/lib/grafana:/var/lib/grafana
+          - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/grafana/etc/grafana/grafana.ini:/etc/grafana/grafana.ini
+          - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/grafana/var/log/grafana:/var/log/grafana
+</pre></div>
+
+
+<h4 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h4>
+<p>Pick up a monitoring server to host influxDB &amp; Grafana</p>
+<p>Pull images</p>
+<div class="codehilite"><pre><span></span>docker pull grafana/grafana
+docker pull influxdb
+</pre></div>
+
+
+<p>Create sub-dirs</p>
+<div class="codehilite"><pre><span></span>mkdir -p /your_home/monitoring/data/grafana/etc/grafana
+mkdir -p /your_home/monitoring/data/grafana/var/lib/grafana
+mkdir -p /your_home/monitoring/data/grafana/var/log/grafana
+mkdir -p /your_home/monitoring/data/influxdb/
+</pre></div>
+
+
+<p>Generate default InfluxDB config file</p>
+<div class="codehilite"><pre><span></span>cd /your_home/monitoring
+docker run --rm influxdb influxd config &gt; data/influxdb/influxdb.conf
+</pre></div>
+
+
+<p>Get default grafana.ini file from docker container to host</p>
+<div class="codehilite"><pre><span></span>docker run -d grafana/grafana bash
+</pre></div>
+
+
+<p>Find it</p>
+<div class="codehilite"><pre><span></span>docker ps
+</pre></div>
+
+
+<p>Go in it</p>
+<div class="codehilite"><pre><span></span>docker exec -it CONTAINER_ID bash
+</pre></div>
+
+
+<p>Cat the /etc/grafana/grafana/ini file and copy its content to data/grafana/etc/grafana/grafana.ini file.</p>
+<p>Copy the compose yaml (see below)</p>
+<div class="codehilite"><pre><span></span>/your_home/monitoring/docker-compose-central.yml
+mv /your_home/monitoring/docker-compose-central.yml /your_home/monitoring/docker-compose.yml
+</pre></div>
+
+
+<p>Start the stack</p>
+<div class="codehilite"><pre><span></span>docker-compose up -d
+</pre></div>
+
+
+<p>Here are some grafana dashboards :</p>
+<ul>
+<li><a href="../resources/grafana-dashboard-pgsql-overview.json">PostgreSQL overview</a></li>
+<li><a href="../resources/grafana-dashboard-pgsql-advanced.json">PostgreSQL advanced view</a></li>
+<li><a href="../resources/grafana-dashboard-single-table.json">PostgreSQL single table monitoring</a></li>
+<li><a href="../resources/grafana-dashboard-influxdb.json">Central server (influxdb + grafana) overview</a></li>
+</ul>
+<h4 id="control-influxdb">Control influxdb<a class="headerlink" href="#control-influxdb" title="Permanent link">&para;</a></h4>
+<p>Identify the influxDB container ID with :</p>
+<div class="codehilite"><pre><span></span>docker ps
+</pre></div>
+
+
+<p>Then</p>
+<div class="codehilite"><pre><span></span>docker exec -it INFLUX_CONTAINER_ID bash
+</pre></div>
+
+
+<p>And </p>
+<div class="codehilite"><pre><span></span>influx
+</pre></div>
+
+
+<p>To get the influx cli. Connect to the telegraf db by :</p>
+<div class="codehilite"><pre><span></span>use telegraf
+</pre></div>
+
+
+<p>Display the tables (measurements) :</p>
+<div class="codehilite"><pre><span></span>show measurements
+</pre></div>
+
+
+<p>Display a measurement content :</p>
+<div class="codehilite"><pre><span></span>select * from the_measurement where time &gt; now() - 1h
+</pre></div>
+
+
+<h2 id="collector">Collector<a class="headerlink" href="#collector" title="Permanent link">&para;</a></h2>
+<p>We have to deploy a telegraf per target server.</p>
+<h4 id="docker-composeyml_1">Docker-compose.yml<a class="headerlink" href="#docker-composeyml_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>version: &#39;2&#39;
+
+services:
+## Telegraf container
+    telegraf:
+        image: telegraf:latest
+        volumes:
+            # standard config
+            - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+            # custom config - can&#39;t make it workw
+#            - <span class="cp">${</span><span class="n">PWD</span><span class="cp">}</span>/data/telegraf/telegraf-ext/custom.config:/etc/telegraf/telegraf.d/custom.conf
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        restart: always
+</pre></div>
+
+
+<h4 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">&para;</a></h4>
+<p>Install Docker / docker-compose if necessary : </p>
+<div class="codehilite"><pre><span></span>install docker
+install docker-compose
+</pre></div>
+
+
+<p>Configure Docker to access network through proxy for example :</p>
+<div class="codehilite"><pre><span></span>sudo mkdir -p /etc/systemd/system/docker.service.d/
+sudo nano /etc/systemd/system/docker.service.d/docker.conf
+
+#Copy in this file something like
+[Service]
+ExecStart=
+Environment=&quot;HTTP_PROXY=the_proxy&quot;
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+</pre></div>
+
+
+<p>Pull images</p>
+<div class="codehilite"><pre><span></span>docker pull telegraf
+</pre></div>
+
+
+<p>Create sub-dirs</p>
+<div class="codehilite"><pre><span></span>mkdir -p /your_home/monitoring/data/telegraf/
+</pre></div>
+
+
+<p>Generate default config files</p>
+<div class="codehilite"><pre><span></span>cd /your_home/monitoring
+docker run --rm telegraf -sample-config &gt; data/telegraf/telegraf.conf
+</pre></div>
+
+
+<p>General configuration, edit <code>telegraf.conf</code></p>
+<p>In [global_tags] part, add : </p>
+<div class="codehilite"><pre><span></span>customer = &quot;the_customer&quot;
+</pre></div>
+
+
+<p>In [agent] part, set :</p>
+<div class="codehilite"><pre><span></span>interval = &quot;60s&quot;
+debug = true                    # might be useful !
+hostname = &quot;the_host_name&quot;    # or whatever
+</pre></div>
+
+
+<p>In [[outputs.influxdb]] part, set</p>
+<div class="codehilite"><pre><span></span>urls = [&quot;http://influx.mymonitoring.com:80&quot;]
+# If necessary
+http_proxy = &quot;http://corporate.proxy:3128&quot;
+</pre></div>
+
+
+<p>Copy the compose yaml</p>
+<div class="codehilite"><pre><span></span>/your_home/monitoring/docker-compose-telegraf.yml
+mv /your_home/monitoring/docker-compose-telegraf.yml /your_home/monitoring/docker-compose.yml
+</pre></div>
+
+
+<p>Start the stack</p>
+<div class="codehilite"><pre><span></span>docker-compose up -d
+</pre></div>
+
+
+<p>Check the logs. You should see :</p>
+<div class="codehilite"><pre><span></span>telegraf_1  | 2018/02/05 10:38:37 I! Using config file: /etc/telegraf/telegraf.conf
+telegraf_1  | 2018-02-05T10:38:37Z D! Attempting connection to output: influxdb
+telegraf_1  | 2018-02-05T10:38:37Z D! Successfully connected to output: influxdb
+telegraf_1  | 2018-02-05T10:38:37Z I! Starting Telegraf v1.5.2
+telegraf_1  | 2018-02-05T10:38:37Z I! Loaded outputs: influxdb
+telegraf_1  | 2018-02-05T10:38:37Z I! Loaded inputs: inputs.postgresql_extensible inputs.postgresql_extensible inputs.postgresql_extensible inputs.disk inputs.diskio inputs.kernel inputs.mem inputs.postgresql inputs.processes inputs.swap inputs.system inputs.cpu
+telegraf_1  | 2018-02-05T10:38:37Z I! Tags enabled: customer=the_customer host=the_host_name
+telegraf_1  | 2018-02-05T10:38:37Z I! Agent Config: Interval:1m0s, Quiet:false, Hostname:&quot;the_host_name&quot;, Flush Interval:10s
+</pre></div>
+
+
+<p>Ajouter des inputs à telegraf (change the database IP in each <code>[[inputs.postgresql]]</code> block):</p>
+<div class="codehilite"><pre><span></span><span class="k">[[inputs.postgresql]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;60s&quot;</span>
+<span class="s">  ## specify address via a url matching:</span>
+<span class="s">  ##   postgres://[pqgotest[:password]]@localhost[/dbname]\</span>
+<span class="s">  ##       ?sslmode=[disable|verify-ca|verify-full]</span>
+<span class="s">  ## or a simple string:</span>
+<span class="s">  ##   host=localhost user=pqotest password=... sslmode=... dbname=app_production</span>
+<span class="s">  ##</span>
+<span class="s">  ## All connection parameters are optional.</span>
+<span class="s">  ##</span>
+<span class="s">  ## Without the dbname parameter, the driver will default to a database</span>
+<span class="s">  ## with the same name as the user. This dbname is just for instantiating a</span>
+<span class="s">  ## connection with the server and doesn&#39;t restrict the databases we are trying</span>
+<span class="s">  ## to grab metrics for.</span>
+<span class="s">  ##</span>
+<span class="s">  #address = &quot;host=10.2.1.188 user=my_user sslmode=disable dbname=postgres&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=postgres&quot;</span>
+<span class="s">  ## A  list of databases to explicitly ignore.  If not specified, metrics for all</span>
+<span class="s">  ## databases are gathered.  Do NOT use with the &#39;databases&#39; option.</span>
+<span class="s">  # ignored_databases = [&quot;postgres&quot;, &quot;template0&quot;, &quot;template1&quot;]</span>
+<span class="s">  ignored_databases = [&quot;postgres&quot;, &quot;template0&quot;, &quot;template1&quot;]</span>
+<span class="s">  ## A list of databases to pull metrics about. If not specified, metrics for all</span>
+<span class="s">  ## databases are gathered.  Do NOT use with the &#39;ignored_databases&#39; option.</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Checkpoints</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;300s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=postgres&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Checkpoints stats</span>
+  <span class="c1"># checkpoints_timeout_pct | checkpoints_req_pct | avg_checkpoints_minutes | avg_checkpoint_write | total_written | checkpoint_write_pct | backend_write_pct | total_checkpoints | seconds_since_start | setting_checkpoint_timeout | setting_max_wal_size </span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT (100*checkpoints_timed) / total_checkpoints as checkpoints_timeout_pct, 100 - (100*checkpoints_timed) / total_checkpoints AS checkpoints_req_pct, seconds_since_start / total_checkpoints / 60 AS avg_checkpoints_minutes, buffers_checkpoint * block_size / (checkpoints_timed + checkpoints_req) AS avg_checkpoint_write, block_size * (buffers_checkpoint + buffers_clean + buffers_backend) AS total_written, 100 * buffers_checkpoint / (buffers_checkpoint + buffers_clean + buffers_backend) AS checkpoint_write_pct, 100 * buffers_backend / (buffers_checkpoint + buffers_clean + buffers_backend) AS backend_write_pct, total_checkpoints,seconds_since_start, (select setting from pg_settings where name = &#39;checkpoint_timeout&#39;) as setting_checkpoint_timeout, (select (setting::bigint) * 16*1024*1024 from pg_settings where name = &#39;max_wal_size&#39;) as setting_max_wal_size FROM (SELECT EXTRACT(EPOCH FROM (now() - stats_reset)) AS seconds_since_start, *, (checkpoints_timed+checkpoints_req) AS total_checkpoints FROM pg_stat_bgwriter WHERE (checkpoints_timed+checkpoints_req)&gt;0) AS sub, (SELECT cast(current_setting(&#39;block_size&#39;) AS integer) AS block_size) bs&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_checkpoints&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Sizes</span>
+<span class="c1">##</span>
+<span class="c1">## Create one new block per database</span>
+<span class="c1">## Change de &quot;dbName&quot; in the &quot;address&quot; line</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;1800s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=the_db&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Size stats</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT (SELECT current_database()) as dbname, sum(pg_table_size(table_name))::bigint AS table_size, sum(pg_indexes_size(table_name))::bigint AS index_size FROM (SELECT (&#39;&#39; || table_schema || &#39;.&#39; || table_name || &#39;&#39;) AS table_name FROM information_schema.tables WHERE table_schema=&#39;public&#39;) AS all_tables1&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_size&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Bloating</span>
+<span class="c1">##</span>
+<span class="c1">## Create one new block per database</span>
+<span class="c1">## Change de &quot;dbName&quot; in the &quot;address&quot; line</span>
+<span class="c1">## </span>
+<span class="c1">## CAREFUL : user indexes query could be harmful for the DB load</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;900s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=the_db&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Bloating tables system</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT &#39;tables&#39; as relation, &#39;system&#39; as owner, (SELECT current_database()) as dbname, bloat_size::bigint, real_size::bigint, (bloat_size / real_size)::float as bloat_ratio FROM (SELECT SUM(bloat_bytes) as bloat_size FROM (SELECT  CASE WHEN (tblpages-est_tblpages_ff)*bs &gt; 0 THEN ((tblpages-est_tblpages_ff)*bs)::bigint ELSE 0 END AS bloat_bytes, CASE WHEN tblpages - est_tblpages_ff &gt; 0 THEN round((100 * (tblpages - est_tblpages_ff)/tblpages::float)::numeric, 1) ELSE 0 END AS bloat_ratio FROM (SELECT ceil( reltuples / ( (bs-page_hdr)/tpl_size ) ) + ceil( toasttuples / 4 ) AS est_tblpages, ceil( reltuples / ( (bs-page_hdr)*fillfactor/(tpl_size*100) ) ) + ceil( toasttuples / 4 ) AS est_tblpages_ff, tblpages, bs FROM (SELECT ( 4 + tpl_hdr_size + tpl_data_size + (2*ma) - CASE WHEN tpl_hdr_size%ma = 0 THEN ma ELSE tpl_hdr_size%ma END - CASE WHEN ceil(tpl_data_size)::int%ma = 0 THEN ma ELSE ceil(tpl_data_size)::int%ma END) AS tpl_size, (heappages + toastpages) AS tblpages, reltuples, toasttuples, bs, page_hdr, fillfactor FROM (SELECT ns.nspname AS schemaname, tbl.relname AS tblname, tbl.reltuples, tbl.relpages AS heappages, coalesce(toast.relpages, 0) AS toastpages, coalesce(toast.reltuples, 0) AS toasttuples, coalesce(substring(array_to_string(tbl.reloptions, &#39; &#39;) FROM &#39;%fillfactor=#\&quot;__#\&quot;%&#39; FOR &#39;#&#39;)::smallint, 100) AS fillfactor, current_setting(&#39;block_size&#39;)::numeric AS bs, CASE WHEN version()~&#39;mingw32&#39; OR version()~&#39;64-bit|x86_64|ppc64|ia64|amd64&#39; THEN 8 ELSE 4 END AS ma, 24 AS page_hdr, 23 + CASE WHEN MAX(coalesce(null_frac,0)) &gt; 0 THEN ( 7 + count(*) ) / 8 ELSE 0::int END + CASE WHEN tbl.relhasoids THEN 4 ELSE 0 END AS tpl_hdr_size, sum( (1-coalesce(s.null_frac, 0)) * coalesce(s.avg_width, 1024) ) AS tpl_data_size FROM pg_attribute AS att JOIN pg_class AS tbl ON att.attrelid = tbl.oid JOIN pg_namespace AS ns ON ns.oid = tbl.relnamespace JOIN pg_stats AS s ON s.schemaname=ns.nspname AND s.tablename = tbl.relname AND s.inherited=false AND s.attname=att.attname LEFT JOIN pg_class AS toast ON tbl.reltoastrelid = toast.oid WHERE att.attnum &gt; 0 AND NOT att.attisdropped AND tbl.relkind = &#39;r&#39; AND ns.nspname = &#39;pg_catalog&#39; GROUP BY 1,2,3,4,5,6,7,8,9,10, tbl.relhasoids) AS s) AS s2) AS s3) AS s4) as s5, (SELECT sum(pg_table_size(table_name)) as real_size FROM (SELECT (&#39;&#39; || table_schema || &#39;.&#39; || table_name || &#39;&#39;) AS table_name FROM information_schema.tables WHERE table_schema=&#39;pg_catalog&#39;) AS all_tables1) as p1&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;relation,owner,dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_bloat&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Bloating index system</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT &#39;index&#39; as relation, &#39;system&#39; as owner, (SELECT current_database()) as dbname, bloat_size::bigint, real_size::bigint, (bloat_size / real_size)::float as bloat_ratio FROM (SELECT SUM(bloat_bytes) as bloat_size FROM (WITH btree_index_atts AS (SELECT nspname, relname, reltuples, relpages, indrelid, relam, regexp_split_to_table(indkey::text, &#39; &#39;)::smallint AS attnum, indexrelid as index_oid FROM pg_index JOIN pg_class ON pg_class.oid=pg_index.indexrelid JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace JOIN pg_am ON pg_class.relam = pg_am.oid WHERE pg_am.amname = &#39;btree&#39; AND pg_namespace.nspname=&#39;pg_catalog&#39;), index_item_sizes AS (SELECT i.nspname, i.relname, i.reltuples, i.relpages, i.relam, (quote_ident(s.schemaname) || &#39;.&#39; || quote_ident(s.tablename))::regclass AS starelid, a.attrelid AS table_oid, index_oid, current_setting(&#39;block_size&#39;)::numeric AS bs, CASE WHEN version() ~ &#39;mingw32&#39; OR version() ~ &#39;64-bit&#39; THEN 8 ELSE 4 END AS maxalign, 24 AS pagehdr, CASE WHEN max(coalesce(s.null_frac,0)) = 0 THEN 2 ELSE 6 END AS index_tuple_hdr, sum( (1-coalesce(s.null_frac, 0)) * coalesce(s.avg_width, 2048) ) AS nulldatawidth FROM pg_attribute AS a JOIN pg_stats AS s ON (quote_ident(s.schemaname) || &#39;.&#39; || quote_ident(s.tablename))::regclass=a.attrelid AND s.attname = a.attname  JOIN btree_index_atts AS i ON i.indrelid = a.attrelid AND a.attnum = i.attnum WHERE a.attnum &gt; 0 GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9), index_aligned AS (SELECT bs, reltuples, relpages, relam, table_oid, ( 2 + maxalign - CASE WHEN index_tuple_hdr%maxalign = 0 THEN maxalign ELSE index_tuple_hdr%maxalign END + nulldatawidth + maxalign - CASE WHEN nulldatawidth::integer%maxalign = 0 THEN maxalign ELSE nulldatawidth::integer%maxalign END)::numeric AS nulldatahdrwidth, pagehdr FROM index_item_sizes AS s1), otta_calc AS (SELECT bs, table_oid, relpages, coalesce(ceil((reltuples*(4+nulldatahdrwidth))/(bs-pagehdr::float)) + CASE WHEN am.amname IN (&#39;hash&#39;,&#39;btree&#39;) THEN 1 ELSE 0 END , 0) AS otta FROM index_aligned AS s2 LEFT JOIN pg_am am ON s2.relam = am.oid), raw_bloat AS (SELECT CASE WHEN sub.relpages &lt;= otta THEN 0 ELSE bs*(sub.relpages-otta)::bigint END AS wastedbytes FROM otta_calc AS sub JOIN pg_class AS c ON c.oid=sub.table_oid) SELECT wastedbytes as bloat_bytes FROM raw_bloat) as s1) as s2, (SELECT sum(pg_indexes_size(table_name)) as real_size FROM (SELECT (&#39;&#39; || table_schema || &#39;.&#39; || table_name || &#39;&#39;) AS table_name FROM information_schema.tables WHERE table_schema=&#39;pg_catalog&#39;) AS all_tables1) as p1&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;relation,owner,dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_bloat&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Bloating tables user</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT &#39;tables&#39; as relation, &#39;user&#39; as owner, (SELECT current_database()) as dbname, bloat_size::bigint, real_size::bigint, (bloat_size / real_size)::float as bloat_ratio FROM (SELECT SUM(bloat_bytes) as bloat_size FROM (SELECT  CASE WHEN (tblpages-est_tblpages_ff)*bs &gt; 0 THEN ((tblpages-est_tblpages_ff)*bs)::bigint ELSE 0 END AS bloat_bytes, CASE WHEN tblpages - est_tblpages_ff &gt; 0 THEN round((100 * (tblpages - est_tblpages_ff)/tblpages::float)::numeric, 1) ELSE 0 END AS bloat_ratio FROM (SELECT ceil( reltuples / ( (bs-page_hdr)/tpl_size ) ) + ceil( toasttuples / 4 ) AS est_tblpages, ceil( reltuples / ( (bs-page_hdr)*fillfactor/(tpl_size*100) ) ) + ceil( toasttuples / 4 ) AS est_tblpages_ff, tblpages, bs FROM (SELECT ( 4 + tpl_hdr_size + tpl_data_size + (2*ma) - CASE WHEN tpl_hdr_size%ma = 0 THEN ma ELSE tpl_hdr_size%ma END - CASE WHEN ceil(tpl_data_size)::int%ma = 0 THEN ma ELSE ceil(tpl_data_size)::int%ma END) AS tpl_size, (heappages + toastpages) AS tblpages, reltuples, toasttuples, bs, page_hdr, fillfactor FROM (SELECT ns.nspname AS schemaname, tbl.relname AS tblname, tbl.reltuples, tbl.relpages AS heappages, coalesce(toast.relpages, 0) AS toastpages, coalesce(toast.reltuples, 0) AS toasttuples, coalesce(substring(array_to_string(tbl.reloptions, &#39; &#39;) FROM &#39;%fillfactor=#\&quot;__#\&quot;%&#39; FOR &#39;#&#39;)::smallint, 100) AS fillfactor, current_setting(&#39;block_size&#39;)::numeric AS bs, CASE WHEN version()~&#39;mingw32&#39; OR version()~&#39;64-bit|x86_64|ppc64|ia64|amd64&#39; THEN 8 ELSE 4 END AS ma, 24 AS page_hdr, 23 + CASE WHEN MAX(coalesce(null_frac,0)) &gt; 0 THEN ( 7 + count(*) ) / 8 ELSE 0::int END + CASE WHEN tbl.relhasoids THEN 4 ELSE 0 END AS tpl_hdr_size, sum( (1-coalesce(s.null_frac, 0)) * coalesce(s.avg_width, 1024) ) AS tpl_data_size FROM pg_attribute AS att JOIN pg_class AS tbl ON att.attrelid = tbl.oid JOIN pg_namespace AS ns ON ns.oid = tbl.relnamespace JOIN pg_stats AS s ON s.schemaname=ns.nspname AND s.tablename = tbl.relname AND s.inherited=false AND s.attname=att.attname LEFT JOIN pg_class AS toast ON tbl.reltoastrelid = toast.oid WHERE att.attnum &gt; 0 AND NOT att.attisdropped AND tbl.relkind = &#39;r&#39; AND ns.nspname = &#39;public&#39; GROUP BY 1,2,3,4,5,6,7,8,9,10, tbl.relhasoids) AS s) AS s2) AS s3) AS s4) as s5, (SELECT sum(pg_table_size(table_name)) as real_size FROM (SELECT (&#39;&#39; || table_schema || &#39;.&#39; || table_name || &#39;&#39;) AS table_name FROM information_schema.tables WHERE table_schema=&#39;public&#39;) AS all_tables1) as p1&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;relation,owner,dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_bloat&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Bloating index user</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;SELECT &#39;index&#39; as relation, &#39;user&#39; as owner, (SELECT current_database()) as dbname, bloat_size::bigint, real_size::bigint, (bloat_size / real_size)::float as bloat_ratio FROM (SELECT SUM(bloat_bytes) as bloat_size FROM (WITH btree_index_atts AS (SELECT nspname, relname, reltuples, relpages, indrelid, relam, regexp_split_to_table(indkey::text, &#39; &#39;)::smallint AS attnum, indexrelid as index_oid FROM pg_index JOIN pg_class ON pg_class.oid=pg_index.indexrelid JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace JOIN pg_am ON pg_class.relam = pg_am.oid WHERE pg_am.amname = &#39;btree&#39; AND pg_namespace.nspname=&#39;public&#39;), index_item_sizes AS (SELECT i.nspname, i.relname, i.reltuples, i.relpages, i.relam, (quote_ident(s.schemaname) || &#39;.&#39; || quote_ident(s.tablename))::regclass AS starelid, a.attrelid AS table_oid, index_oid, current_setting(&#39;block_size&#39;)::numeric AS bs, CASE WHEN version() ~ &#39;mingw32&#39; OR version() ~ &#39;64-bit&#39; THEN 8 ELSE 4 END AS maxalign, 24 AS pagehdr, CASE WHEN max(coalesce(s.null_frac,0)) = 0 THEN 2 ELSE 6 END AS index_tuple_hdr, sum( (1-coalesce(s.null_frac, 0)) * coalesce(s.avg_width, 2048) ) AS nulldatawidth FROM pg_attribute AS a JOIN pg_stats AS s ON (quote_ident(s.schemaname) || &#39;.&#39; || quote_ident(s.tablename))::regclass=a.attrelid AND s.attname = a.attname  JOIN btree_index_atts AS i ON i.indrelid = a.attrelid AND a.attnum = i.attnum WHERE a.attnum &gt; 0 GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9), index_aligned AS (SELECT bs, reltuples, relpages, relam, table_oid, ( 2 + maxalign - CASE WHEN index_tuple_hdr%maxalign = 0 THEN maxalign ELSE index_tuple_hdr%maxalign END + nulldatawidth + maxalign - CASE WHEN nulldatawidth::integer%maxalign = 0 THEN maxalign ELSE nulldatawidth::integer%maxalign END)::numeric AS nulldatahdrwidth, pagehdr FROM index_item_sizes AS s1), otta_calc AS (SELECT bs, table_oid, relpages, coalesce(ceil((reltuples*(4+nulldatahdrwidth))/(bs-pagehdr::float)) + CASE WHEN am.amname IN (&#39;hash&#39;,&#39;btree&#39;) THEN 1 ELSE 0 END , 0) AS otta FROM index_aligned AS s2 LEFT JOIN pg_am am ON s2.relam = am.oid), raw_bloat AS (SELECT CASE WHEN sub.relpages &lt;= otta THEN 0 ELSE bs*(sub.relpages-otta)::bigint END AS wastedbytes FROM otta_calc AS sub JOIN pg_class AS c ON c.oid=sub.table_oid) SELECT wastedbytes as bloat_bytes FROM raw_bloat) as s1) as s2, (SELECT sum(pg_indexes_size(table_name)) as real_size FROM (SELECT (&#39;&#39; || table_schema || &#39;.&#39; || table_name || &#39;&#39;) AS table_name FROM information_schema.tables WHERE table_schema=&#39;public&#39;) AS all_tables1) as p1&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;relation,owner,dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_bloat&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Cache hit</span>
+<span class="c1">##</span>
+<span class="c1">## Create one new block per database</span>
+<span class="c1">## Change de &quot;dbName&quot; in the &quot;address&quot; line</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;30s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=the_db&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Cache hits stats</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;WITH stats_heap AS (SELECT (SELECT sum(heap_blks_read) FROM pg_statio_user_tables)::bigint as heap_read, (SELECT sum(heap_blks_hit) FROM pg_statio_user_tables)::bigint as heap_hit), stats_idx AS (SELECT (SELECT sum(idx_blks_read) FROM pg_statio_user_indexes)::bigint as idx_read, (SELECT sum(idx_blks_hit) FROM pg_statio_user_indexes)::bigint as idx_hit), bs AS (SELECT cast(current_setting(&#39;block_size&#39;) AS integer) AS block_size) SELECT current_database() AS dbname, (heap_read * block_size)::bigint AS heap_read, (heap_hit * block_size)::bigint AS heap_hit, ((heap_hit::float - heap_read::float) / heap_hit::float)::float as heap_ratio, (idx_read * block_size)::bigint AS idx_read, (idx_hit * block_size)::bigint AS idx_hit, ((idx_hit::float - idx_read::float) / idx_hit::float)::float as idx_ratio FROM bs, stats_heap, stats_idx&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;dbname&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_cache&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## PostgreSQL Server settings</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;3600s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=postgres&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1">#Settings</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;select name, setting, unit, category from pg_settings&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;name&quot;</span>
+<span class="s">  measurement=&quot;pg_settings&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Single table statistics</span>
+<span class="c1">##</span>
+<span class="c1">## General stats</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;60s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=the_db&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;select (SELECT current_database()) as db_name, &#39;probes_global_statistics&#39; as table_name, seq_scan::bigint, seq_tup_read::bigint, idx_scan::bigint, idx_tup_fetch::bigint as idx_tup_read, n_tup_ins::bigint, n_tup_del::bigint, (n_tup_upd + n_tup_hot_upd)::bigint as n_tup_total_upd, (CASE WHEN (n_tup_hot_upd + n_tup_upd) &gt; 0 THEN n_tup_hot_upd::float / (n_tup_hot_upd + n_tup_upd)::float ELSE 0 END)::float as hot_upd_ratio, n_live_tup::bigint, n_dead_tup::bigint, (n_dead_tup::float / (n_live_tup + n_dead_tup)::float) as bloating_ratio, (vacuum_count + autovacuum_count)::bigint as total_vacuum, (analyze_count + autoanalyze_count)::bigint as total_analyze, EXTRACT(EPOCH FROM (now() - CASE WHEN COALESCE(last_autovacuum, to_timestamp(0)) &lt; COALESCE(last_vacuum, to_timestamp(0)) THEN COALESCE(last_vacuum, to_timestamp(0)) ELSE COALESCE(last_autovacuum, to_timestamp(0)) END)) as duration_since_last_vacuum, EXTRACT(EPOCH FROM (now() - CASE WHEN COALESCE(last_autoanalyze, to_timestamp(0)) &lt; COALESCE(last_analyze, to_timestamp(0)) THEN COALESCE(last_analyze, to_timestamp(0)) ELSE COALESCE(last_autoanalyze, to_timestamp(0)) END)) as duration_since_last_analyze from pg_stat_user_tables where relname=&#39;probes_global_statistics&#39;&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;table_name,db_name&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_single_table&quot;</span>
+
+<span class="c1">## #######################################################</span>
+<span class="c1">## Single table statistics</span>
+<span class="c1">##</span>
+<span class="c1">## Cache usage</span>
+<span class="c1">##</span>
+<span class="k">[[inputs.postgresql_extensible]]</span>
+  <span class="na">interval</span> <span class="o">=</span> <span class="s">&quot;60s&quot;</span>
+<span class="s">  address = &quot;host=10.xx.yy.196 user=my_user password=my_password sslmode=disable dbname=the_db&quot;</span>
+<span class="k">[[inputs.postgresql_extensible.query]]</span>
+  <span class="c1"># single table cache usage</span>
+  <span class="na">sqlquery</span><span class="o">=</span><span class="s">&quot;WITH stats_heap AS (SELECT (SELECT heap_blks_read FROM pg_statio_user_tables where relname=&#39;probes_global_statistics&#39;)::bigint as heap_read, (SELECT heap_blks_hit FROM pg_statio_user_tables where relname=&#39;probes_global_statistics&#39;)::bigint as heap_hit), stats_idx AS (SELECT (SELECT sum(idx_blks_read) FROM pg_statio_user_indexes where relname=&#39;probes_global_statistics&#39;)::bigint as idx_read, (SELECT sum(idx_blks_hit) FROM pg_statio_user_indexes where relname=&#39;probes_global_statistics&#39;)::bigint as idx_hit), bs AS (SELECT cast(current_setting(&#39;block_size&#39;) AS integer) AS block_size) SELECT (SELECT current_database()) as db_name, &#39;probes_global_statistics&#39; as table_name, (heap_read * block_size)::bigint AS heap_read, (heap_hit * block_size)::bigint AS heap_hit, (heap_hit::float / (heap_read + heap_hit)::float)::float as heap_ratio, (idx_read * block_size)::bigint AS idx_read, (idx_hit * block_size)::bigint AS idx_hit, (idx_hit::float / (idx_read + idx_hit)::float)::float as idx_ratio FROM bs, stats_heap, stats_idx&quot;</span>
+<span class="s">  version=901</span>
+<span class="s">  withdbname=false</span>
+<span class="s">  tagvalue=&quot;table_name,db_name&quot;</span>
+<span class="s">  measurement=&quot;pg_stat_single_table_cache&quot;</span>
+</pre></div>
+
+
+<p>Example of telegraf configuration :</p>
+<ul>
+<li>for a single database server : <a href="../resources/telegraf-single-database.conf">here</a> </li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../statistics/" title="Statistics" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Statistics
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../pgsql_perf/" title="Pgsql perf" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Pgsql perf
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

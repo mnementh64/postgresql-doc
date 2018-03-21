@@ -1,0 +1,744 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="PostgreSQL doc">
+      
+      
+      
+        <meta name="author" content="Sylvain Caillet">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Other points - PostgreSQL doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#other-points" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="PostgreSQL doc" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                PostgreSQL doc
+              </span>
+              <span class="md-header-nav__topic">
+                Other points
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    PostgreSQL doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mvcc/" title="MVCC model" class="md-nav__link">
+      MVCC model
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cache_system/" title="Cache system" class="md-nav__link">
+      Cache system
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../wal_files/" title="Wal files" class="md-nav__link">
+      Wal files
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../checkpoints/" title="Checkpoints" class="md-nav__link">
+      Checkpoints
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../autovacuum/" title="Autovacuum" class="md-nav__link">
+      Autovacuum
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../statistics/" title="Statistics" class="md-nav__link">
+      Statistics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../monitoring/" title="Monitoring" class="md-nav__link">
+      Monitoring
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pgsql_perf/" title="Performance with PostgreSQL" class="md-nav__link">
+      Performance with PostgreSQL
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../query_optimizations/" title="Query optimizations" class="md-nav__link">
+      Query optimizations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../table_design/" title="Table design" class="md-nav__link">
+      Table design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Other points
+      </label>
+    
+    <a href="./" title="Other points" class="md-nav__link md-nav__link--active">
+      Other points
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autovacuum" title="Autovacuum" class="md-nav__link">
+    Autovacuum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoanalyze" title="Autoanalyze" class="md-nav__link">
+    Autoanalyze
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" title="Index" class="md-nav__link">
+    Index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brin-indexes" title="BRIN indexes" class="md-nav__link">
+    BRIN indexes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-statistics" title="Detailed statistics" class="md-nav__link">
+    Detailed statistics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-analyzer" title="Log analyzer" class="md-nav__link">
+    Log analyzer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statements" title="Statements" class="md-nav__link">
+    Statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vacuum" title="Vacuum" class="md-nav__link">
+    Vacuum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" title="Cache" class="md-nav__link">
+    Cache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../linux_tuning/" title="Linux tuning" class="md-nav__link">
+      Linux tuning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-tools/" title="Useful tools" class="md-nav__link">
+      Useful tools
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../useful-scripts/" title="Useful scripts" class="md-nav__link">
+      Useful scripts
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autovacuum" title="Autovacuum" class="md-nav__link">
+    Autovacuum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoanalyze" title="Autoanalyze" class="md-nav__link">
+    Autoanalyze
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" title="Index" class="md-nav__link">
+    Index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brin-indexes" title="BRIN indexes" class="md-nav__link">
+    BRIN indexes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-statistics" title="Detailed statistics" class="md-nav__link">
+    Detailed statistics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-analyzer" title="Log analyzer" class="md-nav__link">
+    Log analyzer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statements" title="Statements" class="md-nav__link">
+    Statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vacuum" title="Vacuum" class="md-nav__link">
+    Vacuum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" title="Cache" class="md-nav__link">
+    Cache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="other-points">Other points<a class="headerlink" href="#other-points" title="Permanent link">&para;</a></h1>
+<p>Many points could be considered to improve Postgres performance for each well defined use case. Some of them are listed below with external references, and a summary of what is the expected gain.</p>
+<h2 id="autovacuum">Autovacuum<a class="headerlink" href="#autovacuum" title="Permanent link">&para;</a></h2>
+<p>Let it be more aggressive on big tables. At least, down these parameters :</p>
+<div class="codehilite"><pre><span></span>autovacuum_vacuum_scale_factor = 0.01       # or even less
+autovacuum_analyze_scale_factor = 0.01      # or even less
+</pre></div>
+
+
+<p>It's a good idea to also make it more aggressive (with the same parameter values ?) on main catalog tables :</p>
+<table>
+<thead>
+<tr>
+<th>table_name</th>
+<th>table_size</th>
+<th>index_size</th>
+<th>total_size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pg_catalog.pg_statistic</td>
+<td>351 MB</td>
+<td>6856 kB</td>
+<td>358 MB</td>
+</tr>
+<tr>
+<td>pg_catalog.pg_attribute</td>
+<td>170 MB</td>
+<td>81 MB</td>
+<td>252 MB</td>
+</tr>
+<tr>
+<td>pg_catalog.pg_class</td>
+<td>55 MB</td>
+<td>120 MB</td>
+<td>174 MB</td>
+</tr>
+<tr>
+<td>pg_catalog.pg_depend</td>
+<td>26 MB</td>
+<td>54 MB</td>
+<td>80 MB</td>
+</tr>
+<tr>
+<td>pg_catalog.pg_type</td>
+<td>26 MB</td>
+<td>27 MB</td>
+<td>53 MB</td>
+</tr>
+<tr>
+<td>pg_catalog.pg_index</td>
+<td>27 MB</td>
+<td>9760 kB</td>
+<td>37 MB</td>
+</tr>
+</tbody>
+</table>
+<p>A good reading : <a href="https://wiki.postgresql.org/images/5/5e/Autovacuum_pgconfeu_gorthx.pdf">https://wiki.postgresql.org/images/5/5e/Autovacuum_pgconfeu_gorthx.pdf</a>.</p>
+<h2 id="autoanalyze">Autoanalyze<a class="headerlink" href="#autoanalyze" title="Permanent link">&para;</a></h2>
+<p>To be tweacked at least like autovacuum.</p>
+<p>Some day, when other parameters will be well mastered, you could have a look to analyze tuning by column. It could be interesting to consider two main cases, both related to huge tables :</p>
+<ul>
+<li>the default <code>default_statistics_target = 100</code> could be too small to compute good stats from a so small sample (100 rows),</li>
+<li>if the data distribution of a column do not change in the time, maybe we could turn autoanlyze off for this column. </li>
+</ul>
+<h2 id="index">Index<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
+<p>To design indexes for a table, one gold rule to follow is : </p>
+<div class="codehilite"><pre><span></span>Index first for equality, then for ranges.
+</pre></div>
+
+
+<p>Good reading (in french) to understand multi-column indexes, partial indexes, ... : <a href="http://use-the-index-luke.com/fr/sql/la-clause-where/rechercher-un-intervalle">http://use-the-index-luke.com/fr/sql/la-clause-where/rechercher-un-intervalle</a>. </p>
+<h2 id="brin-indexes">BRIN indexes<a class="headerlink" href="#brin-indexes" title="Permanent link">&para;</a></h2>
+<p>BRIN (<code>Block Range INdexes</code>) indexes were introduced in PostgreSQL 9.5 and were designed as range indexes. Link to <a href="https://docs.postgresqlfr.org/9.6/brin.html">official doc</a>.</p>
+<p>They took much less place than B-tree indexes and are quite slower. Their overhead on INSERT is very tiny, unlike for B-tree.</p>
+<p>To resume their interest.<code>BRIN indexes can speed things up a lot, but only if your data has a strong natural ordering to begin with. In our case, using a BRIN index was 500 times more space efficient than a B-tree index, and ran a bit faster too. We managed to improve our best case time by a factor of 2.6 and our worst case time by a factor of 30 with some simple optimizations</code>. Citation from <a href="http://dev.sortable.com/brin-indexes-in-postgres-9.5/">this post</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>They could be of huge interest for time series data : all queries contains range clause for dates, never equality.
+In case of aggregation queries, it let the opportunity to bench the interest to add B-tree indexes on columns involved in GROUP BY clauses.</p>
+</div>
+<h2 id="detailed-statistics">Detailed statistics<a class="headerlink" href="#detailed-statistics" title="Permanent link">&para;</a></h2>
+<h4 id="log-analyzer">Log analyzer<a class="headerlink" href="#log-analyzer" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/dalibo/pgbadger">PgBadger</a> is a powerful log analyzer that produce nice &amp; useful reports. Just have to activate some logging flags. The most responsible for possible overhead is <code>log_min_duration_statement = 0</code>. On busy server, possibly increase this value not to log all queries.  </p>
+<h4 id="statements">Statements<a class="headerlink" href="#statements" title="Permanent link">&para;</a></h4>
+<p>The official extension <a href="https://www.postgresql.org/docs/current/static/pgstatstatements.html">https://www.postgresql.org/docs/current/static/pgstatstatements.html</a> provides tracking of execution statistics on the server.</p>
+<p>To reset the stats gathered by this extension : <code>SELECT pg_stat_statements_reset();</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This extension seems not to could cause a significant overhead.</p>
+</div>
+<h4 id="vacuum">Vacuum<a class="headerlink" href="#vacuum" title="Permanent link">&para;</a></h4>
+<p>The official extension <a href="https://www.postgresql.org/docs/current/static/pgstattuple.html">https://www.postgresql.org/docs/current/static/pgstattuple.html</a> provides various functions to obtain tuple-level / page-level statistics. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No idea if this extension could cause or not a significant overhead.</p>
+</div>
+<h4 id="cache">Cache<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h4>
+<p>The official extension <a href="https://www.postgresql.org/docs/current/static/pgbuffercache.html">https://www.postgresql.org/docs/current/static/pgbuffercache.html</a> provides a means for examining what's happening in the shared buffer cache in real time.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No idea if this extension could cause or not a significant overhead.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../table_design/" title="Table design" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Table design
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../linux_tuning/" title="Linux tuning" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Linux tuning
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            free
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
