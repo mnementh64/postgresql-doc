@@ -6,7 +6,7 @@ This technical doc has been built by a non DBA PostgreSQL. I have used PostgreSQ
 
 Here is the result of many blogs I read, many confs I have seen, many tests I have done, ...
 
-Enjoy !
+[Enjoy on Github !](https://mnementh64.github.io/postgresql-doc/)
 
 ## To see the doc
 
